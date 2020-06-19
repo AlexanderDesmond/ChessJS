@@ -1,4 +1,10 @@
-function RankAndFilesInit(): void {
+init();
+
+function init(): void {
+  rankAndFilesInit();
+}
+
+function rankAndFilesInit(): void {
   let index = 0;
   //let file = FILES.FILE_A;
   //let rank = RANKS.RANK_1;
@@ -22,5 +28,3 @@ function RankAndFilesInit(): void {
 
   console.log("Files:" + files + ", " + "Ranks: " + ranks);
 }
-
-RankAndFilesInit();
