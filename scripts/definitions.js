@@ -66,6 +66,3 @@ const SQUARES = {
 
 // Colours
 const COLOURS = { WHITE: 0, BLACK: 1, BOTH: 2 };
-
-// Boolean
-const BOOL = { FALSE: 0, TRUE: 1 };
