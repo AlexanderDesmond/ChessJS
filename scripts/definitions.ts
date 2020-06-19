@@ -15,9 +15,6 @@ const PIECES = {
   bK: 12,
 };
 
-// Number of squares in the virtual board.
-const NUM_OF_SQUARES: number = 120;
-
 // Files and Ranks
 const FILES = {
   FILE_A: 0,
@@ -64,5 +61,16 @@ const SQUARES = {
   OFFBOARD: 100,
 };
 
+// Number of squares in the virtual board.
+const NUM_OF_SQUARES: number = 120;
+
 // Colours
 const COLOURS = { WHITE: 0, BLACK: 1, BOTH: 2 };
+
+// Arrays for files and ranks of board.
+const files: any[] = new Array(NUM_OF_SQUARES);
+const ranks: any[] = new Array(NUM_OF_SQUARES);
+
+function getSquare(f: number, r: number) {
+  return 21 + f + r * 10;
+}
