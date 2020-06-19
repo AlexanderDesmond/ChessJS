@@ -14,3 +14,6 @@ const PIECES = {
   bQ: 11,
   bK: 12,
 };
+
+// Number of squares in the virtual board.
+const NUM_OF_SQUARES = 120;
