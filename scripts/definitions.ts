@@ -16,7 +16,7 @@ const PIECES = {
 };
 
 // Number of squares in the virtual board.
-const NUM_OF_SQUARES = 120;
+const NUM_OF_SQUARES: number = 120;
 
 // Files and Ranks
 const FILES = {
