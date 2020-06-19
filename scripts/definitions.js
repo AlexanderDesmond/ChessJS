@@ -41,3 +41,6 @@ const RANKS = {
   RANK_8: 7,
   FILE_NONE: 8,
 };
+
+// Colours
+const COLOURS = { WHITE: 0, BLACK: 1, BOTH: 2 };
