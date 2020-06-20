@@ -67,6 +67,9 @@ const NUM_OF_SQUARES: number = 120;
 // Colours
 const COLOURS = { WHITE: 0, BLACK: 1, BOTH: 2 };
 
+// Castling permissions
+const CASTLE_BIT = { WKCA: 1, WQCA: 2, BKCA: 4, BQCA: 8 };
+
 // Arrays for files and ranks of board.
 const files: any[] = new Array(NUM_OF_SQUARES);
 const ranks: any[] = new Array(NUM_OF_SQUARES);
