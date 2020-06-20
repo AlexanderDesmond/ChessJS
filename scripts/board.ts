@@ -28,8 +28,10 @@ chessBoard.moves = 0;
 chessBoard.castling = 0;
 // En passant
 chessBoard.enPassant = 0;
+// Unique identifier to represent board state.
+chessBoard.boardState = 0;
 
 // Return piece index.
-function getPieceIndex(piec: number, piecNum: number): number {
-  return piec * 10 + piecNum;
+function getPieceIndex(piece: number, pieceNum: number): number {
+  return piece * 10 + pieceNum;
 }
