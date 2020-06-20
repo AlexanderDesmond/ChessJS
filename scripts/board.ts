@@ -5,6 +5,8 @@ let chessBoard = <any>{};
 chessBoard.pieces = new Array(NUM_OF_SQUARES);
 // Side whose turn it is.
 chessBoard.side = COLOURS.WHITE;
+// Colour of chess pieces.
+chessBoard.material = new Array(2);
 // Fifty-move rule
 chessBoard.fiftyMoveRule = 0;
 // Count of every move made in the game.
