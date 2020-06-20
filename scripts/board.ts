@@ -18,14 +18,16 @@ chessBoard.moveCount = 0;
 // Count of moves in the Search Tree - relevant to undoing and redoing moves
 chessBoard.moves = 0;
 /* 
-    Castling permissions
+    Castling
     --------------------
     0001 (1) - White can castle king-side
     0010 (2) - White can castle queen-side
     0100 (4) - Black can castle king-side
     1000 (8) - Black can castle queen-side
 */
-chessBoard.castlingPermissions = 0;
+chessBoard.castling = 0;
+// En passant
+chessBoard.enPassant = 0;
 
 // Return piece index.
 function getPieceIndex(piec: number, piecNum: number): number {
