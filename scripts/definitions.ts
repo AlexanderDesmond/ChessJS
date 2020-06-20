@@ -242,6 +242,11 @@ const doesSlide = [
 ];
 
 // Get specific square.
-function getSquare(f: number, r: number) {
+function getSquare(f: number, r: number): number {
   return 21 + f + r * 10;
+}
+
+//
+function generateRandomNumber(): number {
+  return Math.floor(Math.random() * 32) + 1;
 }
