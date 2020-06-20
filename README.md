@@ -1,3 +1,3 @@
 # ChessJS
 
-A simple Chess engine in TypeScript. So, it probably should be called ChessTS.
+A simple Chess engine written in TypeScript. So, it probably should be called ChessTS.
