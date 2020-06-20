@@ -74,10 +74,6 @@ const CASTLE_BIT = { WKCA: 1, WQCA: 2, BKCA: 4, BQCA: 8 };
 const files: any[] = new Array(NUM_OF_SQUARES);
 const ranks: any[] = new Array(NUM_OF_SQUARES);
 
-function getSquare(f: number, r: number) {
-  return 21 + f + r * 10;
-}
-
 // Not a piece, Pawn, Knight, Bishop, Rook, Queen, King, Pawn, Knight, Bishop, Rook, Queen, King
 const notPawn = [
   false,
@@ -244,3 +240,8 @@ const doesSlide = [
   true,
   false,
 ];
+
+// Get specific square.
+function getSquare(f: number, r: number) {
+  return 21 + f + r * 10;
+}
