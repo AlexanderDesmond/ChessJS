@@ -13,7 +13,7 @@ chessBoard.moveCount = 0;
 chessBoard.moves = 0;
 /* 
     Castling permissions
-
+    --------------------
     0001 (1) - White can castle king-side
     0010 (2) - White can castle queen-side
     0100 (4) - Black can castle king-side
