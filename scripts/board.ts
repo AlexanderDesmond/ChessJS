@@ -1,8 +1,12 @@
 // Chess board
 let chessBoard = <any>{};
 
-// Array for holding piece status on board.
+// Array for storing piece status on board.
 chessBoard.pieces = new Array(NUM_OF_SQUARES);
+// Array for storing number of each piece in play.
+chessBoard.pieceNumber = new Array(13);
+//
+chessBoard.pieceList = new Array(14 * 10);
 // Side whose turn it is.
 chessBoard.side = COLOURS.WHITE;
 // Colour of chess pieces.
@@ -22,3 +26,8 @@ chessBoard.moves = 0;
     1000 (8) - Black can castle queen-side
 */
 chessBoard.castlingPermissions = 0;
+
+// Return piece index.
+function getPieceIndex(piec: number, piecNum: number): number {
+  return piec * 10 + piecNum;
+}
