@@ -246,7 +246,7 @@ function getSquare(f: number, r: number): number {
   return 21 + f + r * 10;
 }
 
-//
+// Generate a random generator
 function generateRandomNumber(): number {
-  return Math.floor(Math.random() * 32) + 1;
+  return Math.floor(Math.random() * 255) + 1;
 }
