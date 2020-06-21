@@ -43,3 +43,28 @@ function boardStateInit(): void {
     castlingKeys[i] = generateRandomNumber();
   }
 }
+
+function gridConversionInit(): void {
+  //let file = FILES.FILE_A;
+  //let rank = RANKS.RANK_1
+  let sq = SQUARES.A1;
+  let sq64 = 0;
+
+  // Reset values in arrays to invalid values.
+  for (let i = 0; i < NUM_OF_SQUARES; i++) {
+    _120To64[i] = 65;
+  }
+  for (let i = 0; i < 64; i++) {
+    _64To120[i] = 120;
+  }
+
+  // Fill arrays with correct values for converting between 64 and 120 grids.
+  for (let rank = RANKS.RANK_1; rank <= RANKS.RANK_8; rank++) {
+    for (let file = FILES.FILE_A; file <= FILES.FILE_H; file++) {
+      sq = getSquare(file, rank);
+      _64To120[sq64] = sq;
+      _120To64[sq] = sq64;
+      sq64++;
+    }
+  }
+}
