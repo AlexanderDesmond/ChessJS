@@ -28,3 +28,18 @@ function rankAndFilesInit(): void {
 
   console.log("Files:" + files + ", " + "Ranks: " + ranks);
 }
+
+// Generate constituent parts of boardState UID.
+function boardStateInit(): void {
+  // Generate keys for pieces.
+  for (let i = 0; i < 14 * 120; i++) {
+    pieceKey[i] = generateRandomNumber();
+  }
+
+  // Key for side already generated in definitions.ts.
+
+  // Generate keys for castling states.
+  for (let i = 0; i < 16; i++) {
+    castlingKey[i] = generateRandomNumber();
+  }
+}
