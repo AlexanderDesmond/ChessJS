@@ -255,7 +255,7 @@ function getSquare(f: number, r: number): number {
   return 21 + f + r * 10;
 }
 
-// Generate a random number generator
+// Generate a random number
 function generateRandomNumber(): number {
   // Generate random number, then left shift it and inclusive OR it with the next.
   return (
