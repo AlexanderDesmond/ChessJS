@@ -241,6 +241,11 @@ const doesSlide = [
   false,
 ];
 
+// Parts of boardState uid
+const pieceKey = new Array(14 * 120);
+const sideKey = generateRandomNumber();
+const castlingKey = new Array(16);
+
 // Get specific square.
 function getSquare(f: number, r: number): number {
   return 21 + f + r * 10;
