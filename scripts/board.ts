@@ -77,9 +77,91 @@ function generateBoardState(): number {
   return key;
 }
 
-//
+// Handle the parsing of the FEN code.
 function parseFen(fen: string) {
   resetBoard();
+
+  let rank = RANKS.RANK_8;
+  let file = FILES.FILE_A;
+  let fenIndex = 0;
+  let count = 0;
+  let piece = 0;
+  let square = 0;
+
+  while (rank >= RANKS.RANK_1 && fenIndex < fen.length) {
+    count = 1;
+
+    switch (fen[fenIndex]) {
+      // Handle pieces.
+      case "p":
+        piece = PIECES.bP;
+        break;
+      case "r":
+        piece = PIECES.bR;
+        break;
+      case "n":
+        piece = PIECES.bN;
+        break;
+      case "b":
+        piece = PIECES.bB;
+        break;
+      case "k":
+        piece = PIECES.bK;
+        break;
+      case "q":
+        piece = PIECES.bQ;
+        break;
+      case "P":
+        piece = PIECES.wP;
+        break;
+      case "R":
+        piece = PIECES.wR;
+        break;
+      case "N":
+        piece = PIECES.wN;
+        break;
+      case "B":
+        piece = PIECES.wB;
+        break;
+      case "K":
+        piece = PIECES.wK;
+        break;
+      case "Q":
+        piece = PIECES.wQ;
+        break;
+      // Handle empty squares.
+      case "1":
+      case "2":
+      case "3":
+      case "4":
+      case "5":
+      case "6":
+      case "7":
+      case "8":
+        piece = PIECES.EMPTY;
+        count = Number(fen[fenIndex]);
+        break;
+      // Go to next row/rank.
+      case "/":
+      case " ":
+        rank--;
+        file = FILES.FILE_A;
+        fenIndex++;
+        continue;
+
+      default:
+        console.log("Error with FEN");
+        return;
+    }
+
+    // Go through columns/files and set pieces.
+    for (let i = 0; i < count; i++) {
+      square = getSquare(file, rank);
+      chessBoard.pieces[square] = piece;
+      file++;
+    }
+    fenIndex++;
+  }
 }
 
 // Reset the board.
