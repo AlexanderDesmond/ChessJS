@@ -13,10 +13,10 @@ chessBoard.side = COLOURS.WHITE;
 chessBoard.material = [];
 // Fifty-move rule
 chessBoard.fiftyMoveRule = 0;
-// Count of every move made in the game.
-chessBoard.moveCount = 0;
-// Count of moves in the Search Tree - relevant to undoing and redoing moves
-chessBoard.moves = 0;
+// Count of every half-move made in the game.
+chessBoard.plyCount = 0;
+// Count of half-moves in the Search Tree - relevant to undoing and redoing moves
+chessBoard.plyHistory = 0;
 /* 
     Castling
     --------------------
