@@ -71,8 +71,8 @@ const COLOURS = { WHITE: 0, BLACK: 1, BOTH: 2 };
 const CASTLE_BIT = { WKCA: 1, WQCA: 2, BKCA: 4, BQCA: 8 };
 
 // Arrays for files and ranks of board.
-const files: any[] = new Array(NUM_OF_SQUARES);
-const ranks: any[] = new Array(NUM_OF_SQUARES);
+const files: number[] = [];
+const ranks: number[] = [];
 
 // Not a piece, Pawn, Knight, Bishop, Rook, Queen, King, Pawn, Knight, Bishop, Rook, Queen, King
 const notPawn = [
@@ -242,13 +242,13 @@ const doesSlide = [
 ];
 
 // Parts of boardState uid
-const pieceKeys = new Array(14 * 120);
-const sideKey = generateRandomNumber();
-const castlingKeys = new Array(16);
+const pieceKeys: number[] = [];
+const sideKey: number = generateRandomNumber();
+const castlingKeys: number[] = [];
 
 // Arrays for conversions between 120 and 64 square grids
-const _120To64 = new Array(NUM_OF_SQUARES);
-const _64To120 = new Array(64);
+const _120To64: number[] = [];
+const _64To120: number[] = [];
 
 // Get specific square.
 function getSquare(f: number, r: number): number {

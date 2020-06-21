@@ -2,15 +2,15 @@
 let chessBoard = <any>{};
 
 // Array for storing piece status on board.
-chessBoard.pieces = new Array(NUM_OF_SQUARES);
+chessBoard.pieces = [];
 // Array for storing number of each piece in play.
-chessBoard.pieceNumber = new Array(13);
+chessBoard.pieceNumber = [];
 //
-chessBoard.pieceList = new Array(14 * 10);
+chessBoard.pieceList = [];
 // Side whose turn it is.
 chessBoard.side = COLOURS.WHITE;
 // Colour of chess pieces.
-chessBoard.material = new Array(2);
+chessBoard.material = [];
 // Fifty-move rule
 chessBoard.fiftyMoveRule = 0;
 // Count of every move made in the game.
