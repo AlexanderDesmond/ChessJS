@@ -248,5 +248,11 @@ function getSquare(f: number, r: number): number {
 
 // Generate a random generator
 function generateRandomNumber(): number {
-  return Math.floor(Math.random() * 255) + 1;
+  // Generate random number, then left shift it and inclusive OR it with the next.
+  return (
+    ((Math.floor(Math.random() * 255) + 1) << 24) |
+    ((Math.floor(Math.random() * 255) + 1) << 16) |
+    ((Math.floor(Math.random() * 255) + 1) << 8) |
+    (Math.floor(Math.random() * 255) + 1)
+  );
 }
