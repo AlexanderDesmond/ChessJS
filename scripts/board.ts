@@ -76,3 +76,46 @@ function generateBoardState(): number {
 
   return key;
 }
+
+//
+function parseFen(fen: string) {
+  resetBoard();
+}
+
+// Reset the board.
+function resetBoard(): void {
+  // Clear entire board.
+  for (let i = 0; i < NUM_OF_SQUARES; i++) {
+    chessBoard.pieces[i] = SQUARES.OFFBOARD;
+  }
+
+  // Set the squares of the 64 grid actual chess board as empty.
+  for (let i = 0; i < 64; i++) {
+    chessBoard.pieces[to120(i)] = PIECES.EMPTY;
+  }
+
+  // Set the pieces in the pieceList to EMPTY.
+  for (let i = 0; i < 14 * 10; i++) {
+    chessBoard.pieceList[i] = PIECES.EMPTY;
+  }
+
+  // Set the material of the pieces to 0.
+  for (let i = 0; i < 2; i++) {
+    chessBoard.material[i] = 0;
+  }
+
+  // Set the type of the pieces to 0.
+  for (let i = 0; i < 13; i++) {
+    chessBoard.pieceNumber[i] = 0;
+  }
+
+  // Reset other properties.
+  chessBoard.side = COLOURS.BOTH;
+  chessBoard.fiftyMoveRule = 0;
+  chessBoard.plyCount = 0;
+  chessBoard.plyHistory = 0;
+  chessBoard.castling = 0;
+  chessBoard.enPassant = SQUARES.NO_SQUARE;
+  chessBoard.boardState = 0;
+  chessBoard.moveListStart[chessBoard.plyCount] = 0;
+}
