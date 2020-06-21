@@ -38,7 +38,7 @@ function getPieceIndex(piece: number, pieceNum: number): number {
 
 // Generate boardState UID.
 function generateBoardState(): number {
-  let piece = PIECES.EMPTY;
+  let piece: number = PIECES.EMPTY;
   let key: number = 0;
 
   // For every square on the board.

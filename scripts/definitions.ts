@@ -75,7 +75,7 @@ const files: number[] = [];
 const ranks: number[] = [];
 
 // Not a piece, Pawn, Knight, Bishop, Rook, Queen, King, Pawn, Knight, Bishop, Rook, Queen, King
-const notPawn = [
+const notPawn: boolean[] = [
   false,
   false,
   true,
@@ -90,7 +90,7 @@ const notPawn = [
   true,
   true,
 ];
-const isMajor = [
+const isMajor: boolean[] = [
   false,
   false,
   false,
@@ -105,7 +105,7 @@ const isMajor = [
   true,
   true,
 ];
-const isMinor = [
+const isMinor: boolean[] = [
   false,
   false,
   true,
@@ -120,7 +120,7 @@ const isMinor = [
   false,
   false,
 ];
-const pieceValue = [
+const pieceValue: number[] = [
   0,
   100,
   325,
@@ -135,7 +135,7 @@ const pieceValue = [
   1000,
   50000,
 ];
-const pieceColour = [
+const pieceColour: number[] = [
   COLOURS.BOTH,
   COLOURS.WHITE,
   COLOURS.WHITE,
@@ -150,7 +150,7 @@ const pieceColour = [
   COLOURS.BLACK,
   COLOURS.BLACK,
 ];
-const isPawn = [
+const isPawn: boolean[] = [
   false,
   true,
   false,
@@ -165,7 +165,7 @@ const isPawn = [
   false,
   false,
 ];
-const isKnight = [
+const isKnight: boolean[] = [
   false,
   false,
   true,
@@ -180,7 +180,7 @@ const isKnight = [
   false,
   false,
 ];
-const isKing = [
+const isKing: boolean[] = [
   false,
   false,
   false,
@@ -195,7 +195,7 @@ const isKing = [
   false,
   true,
 ];
-const isRookOrQueen = [
+const isRookOrQueen: boolean[] = [
   false,
   false,
   false,
@@ -210,7 +210,7 @@ const isRookOrQueen = [
   true,
   false,
 ];
-const isBishopOrQueen = [
+const isBishopOrQueen: boolean[] = [
   false,
   false,
   false,
@@ -225,7 +225,7 @@ const isBishopOrQueen = [
   true,
   false,
 ];
-const doesSlide = [
+const doesSlide: boolean[] = [
   false,
   false,
   false,
