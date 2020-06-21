@@ -255,7 +255,7 @@ function getSquare(f: number, r: number): number {
   return 21 + f + r * 10;
 }
 
-// Generate a random generator
+// Generate a random number generator
 function generateRandomNumber(): number {
   // Generate random number, then left shift it and inclusive OR it with the next.
   return (
@@ -264,4 +264,14 @@ function generateRandomNumber(): number {
     ((Math.floor(Math.random() * 255) + 1) << 8) |
     (Math.floor(Math.random() * 255) + 1)
   );
+}
+
+// Return equivalent square from 64 square grid.
+function to64(index: number): number {
+  return _120To64[index];
+}
+
+// Return equivalent square from 120 square grid.
+function to120(index: number): number {
+  return _64To120[index];
 }
