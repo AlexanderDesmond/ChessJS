@@ -246,6 +246,10 @@ const pieceKeys = new Array(14 * 120);
 const sideKey = generateRandomNumber();
 const castlingKeys = new Array(16);
 
+// Arrays for conversions between 120 and 64 square grids
+const _120To64 = new Array(NUM_OF_SQUARES);
+const _64To120 = new Array(64);
+
 // Get specific square.
 function getSquare(f: number, r: number): number {
   return 21 + f + r * 10;
