@@ -33,13 +33,13 @@ function rankAndFilesInit(): void {
 function boardStateInit(): void {
   // Generate keys for pieces.
   for (let i = 0; i < 14 * 120; i++) {
-    pieceKey[i] = generateRandomNumber();
+    pieceKeys[i] = generateRandomNumber();
   }
 
   // Key for side already generated in definitions.ts.
 
   // Generate keys for castling states.
   for (let i = 0; i < 16; i++) {
-    castlingKey[i] = generateRandomNumber();
+    castlingKeys[i] = generateRandomNumber();
   }
 }

@@ -48,7 +48,7 @@ function generateBoardState(): number {
     // If the square has a piece on it and the square is on the chess board.
     if (piece !== PIECES.EMPTY && piece !== SQUARES.OFFBOARD) {
       // XOR the key with the piece key.
-      key ^= pieceKey[piece * 120 + square];
+      key ^= pieceKeys[piece * 120 + square];
     }
   }
 
@@ -60,12 +60,12 @@ function generateBoardState(): number {
 
   // If it is an en passant square.
   if (chessBoard.enPassant !== SQUARES.NO_SQUARE) {
-    // XOR key with pieceKey
-    key ^= pieceKey[chessBoard.enPassant];
+    // XOR key with the piece key.
+    key ^= pieceKeys[chessBoard.enPassant];
   }
 
-  // XOR key with castlingKey
-  key ^= castlingKey[chessBoard.castling];
+  // XOR key with the castling key.
+  key ^= castlingKeys[chessBoard.castling];
 
   return key;
 }
