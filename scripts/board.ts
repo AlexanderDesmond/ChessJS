@@ -31,6 +31,13 @@ chessBoard.enPassant = 0;
 // Unique identifier to represent board state.
 chessBoard.boardState = 0;
 
+// List of moves in the game
+chessBoard.moveList = []; // Length: 64 * 256
+// List of scores for each move
+chessBoard.moveScores = []; // Length: 64 * 256
+// Where the moveList will start
+chessBoard.moveListStart = []; // Length: 64
+
 // Return piece index.
 function getPieceIndex(piece: number, pieceNum: number): number {
   return piece * 10 + pieceNum;
