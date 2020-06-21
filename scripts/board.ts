@@ -35,3 +35,37 @@ chessBoard.boardState = 0;
 function getPieceIndex(piece: number, pieceNum: number): number {
   return piece * 10 + pieceNum;
 }
+
+// Generate boardState UID.
+function generateBoardState(): number {
+  let piece = PIECES.EMPTY;
+  let key: number = 0;
+
+  // For every square on the board.
+  for (let square = 0; square < NUM_OF_SQUARES; square++) {
+    piece = chessBoard.pieces[square];
+
+    // If the square has a piece on it and the square is on the chess board.
+    if (piece !== PIECES.EMPTY && piece !== SQUARES.OFFBOARD) {
+      // XOR the key with the piece key.
+      key ^= pieceKey[piece * 120 + square];
+    }
+  }
+
+  // If it is White's turn
+  if (chessBoard.side === COLOURS.WHITE) {
+    // XOR key with the sideKey
+    key ^= sideKey;
+  }
+
+  // If it is an en passant square.
+  if (chessBoard.enPassant !== SQUARES.NO_SQUARE) {
+    // XOR key with pieceKey
+    key ^= pieceKey[chessBoard.enPassant];
+  }
+
+  // XOR key with castlingKey
+  key ^= castlingKey[chessBoard.castling];
+
+  return key;
+}
