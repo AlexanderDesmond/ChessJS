@@ -1,5 +1,8 @@
 init();
 
+parseFen(START_FEN);
+printBoard();
+
 function init(): void {
   rankAndFilesInit();
 }
