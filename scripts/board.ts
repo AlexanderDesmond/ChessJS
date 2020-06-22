@@ -246,7 +246,7 @@ function resetBoard(): void {
 function printBoard(): void {
   let square, piece;
 
-  console.log("Chess Board:\n");
+  console.log("Chess Board:\n\n");
 
   for (let rank = RANKS.RANK_8; rank >= RANKS.RANK_1; rank--) {
     let line = rankChar[rank] + " ";
@@ -258,7 +258,7 @@ function printBoard(): void {
     console.log(line);
   }
 
-  console.log("");
+  console.log("\n");
   let line = "  ";
   for (let file = FILES.FILE_A; file <= FILES.FILE_H; file++) {
     line += " " + fileChar[file] + " ";

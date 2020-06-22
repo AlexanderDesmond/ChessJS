@@ -29,7 +29,7 @@ function rankAndFilesInit(): void {
     }
   }
 
-  console.log("Files:" + files + ", " + "Ranks: " + ranks);
+  //console.log("Files:" + files + ", " + "Ranks: " + ranks);
 }
 
 // Generate constituent parts of boardState UID.
