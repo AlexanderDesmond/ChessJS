@@ -162,6 +162,47 @@ function parseFen(fen: string) {
     }
     fenIndex++;
   }
+
+  // Handle white or black's turn
+  chessBoard.side = fen[fenIndex] === "w" ? COLOURS.WHITE : COLOURS.BLACK;
+  fenIndex += 2;
+
+  // Handle castling part
+  for (let i = 0; i < 4; i++) {
+    if (fen[fenIndex] === " ") break;
+
+    switch (fen[fenIndex]) {
+      case "k":
+        chessBoard.castling |= CASTLE_BIT.BKCA;
+        break;
+      case "q":
+        chessBoard.castling |= CASTLE_BIT.BQCA;
+        break;
+      case "K":
+        chessBoard.castling |= CASTLE_BIT.WKCA;
+        break;
+      case "Q":
+        chessBoard.castling |= CASTLE_BIT.WQCA;
+        break;
+      default:
+        break;
+    }
+    fenIndex++;
+  }
+  fenIndex++;
+
+  // Handle en passant part
+  if (fen[fenIndex] !== "-") {
+    file = Number(fen[fenIndex]);
+    rank = Number(fen[fenIndex + 1]);
+    console.log(
+      "fen[fenIndex]: " + fen[fenIndex] + ", File: " + file + ", Rank: " + rank
+    );
+    chessBoard.enPassant = getSquare(file, rank);
+  }
+
+  // Set boardState
+  chessBoard.boardState = generateBoardState();
 }
 
 // Reset the board.
