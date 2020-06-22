@@ -242,3 +242,37 @@ function resetBoard(): void {
   chessBoard.boardState = 0;
   chessBoard.moveListStart[chessBoard.plyCount] = 0;
 }
+
+function printBoard(): void {
+  let square, piece;
+
+  console.log("Chess Board:\n");
+
+  for (let rank = RANKS.RANK_8; rank >= RANKS.RANK_1; rank--) {
+    let line = rankChar[rank] + " ";
+    for (let file = FILES.FILE_A; file <= FILES.FILE_H; file++) {
+      square = getSquare(file, rank);
+      piece = chessBoard.pieces[square];
+      line += " " + pieceChar[piece] + " ";
+    }
+    console.log(line);
+  }
+
+  console.log("");
+  let line = "  ";
+  for (let file = FILES.FILE_A; file <= FILES.FILE_H; file++) {
+    line += " " + fileChar[file] + " ";
+  }
+  console.log(line);
+
+  console.log("Side: ", sideChar[chessBoard.side]);
+  console.log("En Passant: ", chessBoard.enPassant);
+  line = "";
+
+  if (chessBoard.castling & CASTLE_BIT.BKCA) line += "k";
+  if (chessBoard.castling & CASTLE_BIT.BQCA) line += "q";
+  if (chessBoard.castling & CASTLE_BIT.WKCA) line += "K";
+  if (chessBoard.castling & CASTLE_BIT.WQCA) line += "Q";
+  console.log("Castling: ", line);
+  console.log("Key: ", chessBoard.boardState.toString(16));
+}
