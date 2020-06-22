@@ -246,10 +246,10 @@ function resetBoard(): void {
 function printBoard(): void {
   let square, piece;
 
-  console.log("Chess Board:\n\n");
+  console.log("Chess Board\n\n");
 
   for (let rank = RANKS.RANK_8; rank >= RANKS.RANK_1; rank--) {
-    let line = rankChar[rank] + " ";
+    let line = rankChar[rank] + "    ";
     for (let file = FILES.FILE_A; file <= FILES.FILE_H; file++) {
       square = getSquare(file, rank);
       piece = chessBoard.pieces[square];
@@ -259,11 +259,11 @@ function printBoard(): void {
   }
 
   console.log("\n");
-  let line = "  ";
+  let line = "     ";
   for (let file = FILES.FILE_A; file <= FILES.FILE_H; file++) {
     line += " " + fileChar[file] + " ";
   }
-  console.log(line);
+  console.log(line + "\n\n");
 
   console.log("Side: ", sideChar[chessBoard.side]);
   console.log("En Passant: ", chessBoard.enPassant);
