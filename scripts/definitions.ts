@@ -80,6 +80,14 @@ const MAX_DEPTH: number = 64;
 const files: number[] = [];
 const ranks: number[] = [];
 
+// Starting position FEN
+const START_FEN: string =
+  "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+const pieceChar = ".PNBRQKpnbrqk";
+const sideChar = "wb-";
+const rankChar = "12345678";
+const fileChar = "abcdefgh";
+
 // Not a piece, Pawn, Knight, Bishop, Rook, Queen, King, Pawn, Knight, Bishop, Rook, Queen, King
 const notPawn: boolean[] = [
   false,
