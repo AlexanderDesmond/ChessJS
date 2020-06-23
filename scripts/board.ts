@@ -206,11 +206,11 @@ function parseFen(fen: string) {
   // Set boardState
   chessBoard.boardState = generateBoardState();
   // Set piece material
-  updatePieceMaterial();
+  updatePieces();
 }
 
 // Update the material of the pieces.
-function updatePieceMaterial(): void {
+function updatePieces(): void {
   // Set the pieces in the pieceList to EMPTY.
   for (let i = 0; i < 14 * 10; i++) {
     chessBoard.pieceList[i] = PIECES.EMPTY;
