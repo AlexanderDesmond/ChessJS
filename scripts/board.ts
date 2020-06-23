@@ -286,6 +286,13 @@ function resetBoard(): void {
   chessBoard.moveListStart[chessBoard.plyCount] = 0;
 }
 
+// Returns true if the given square is under attack.
+function isSquareUnderAttack(square: number, side: number): boolean {
+  let piece, sq;
+
+  return false;
+}
+
 function printBoard(): void {
   let square, piece;
 
