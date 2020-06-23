@@ -207,6 +207,26 @@ function parseFen(fen: string) {
   chessBoard.boardState = generateBoardState();
 }
 
+//
+function updatePieceMaterial(): void {
+  let piece, square, colour;
+
+  for (let i = 0; i < 64; i++) {
+    square = to120(i);
+    piece = chessBoard.pieces[square];
+
+    if (piece !== PIECES.EMPTY) {
+      colour = pieceColour[piece];
+
+      chessBoard.material[colour] += pieceValue[piece];
+      chessBoard.pieceList[
+        getPieceIndex(piece, chessBoard.pieceNumber[piece])
+      ] = square;
+      chessBoard.pieceNumber[piece]++;
+    }
+  }
+}
+
 // Reset the board.
 function resetBoard(): void {
   // Clear entire board.
