@@ -5,6 +5,8 @@ printBoard();
 
 function init(): void {
   rankAndFilesInit();
+  boardStateInit();
+  gridConversionInit();
 }
 
 function rankAndFilesInit(): void {
