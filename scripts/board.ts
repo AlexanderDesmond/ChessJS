@@ -205,10 +205,27 @@ function parseFen(fen: string) {
 
   // Set boardState
   chessBoard.boardState = generateBoardState();
+  // Set piece material
+  updatePieceMaterial();
 }
 
-//
+// Update the material of the pieces.
 function updatePieceMaterial(): void {
+  // Set the pieces in the pieceList to EMPTY.
+  for (let i = 0; i < 14 * 10; i++) {
+    chessBoard.pieceList[i] = PIECES.EMPTY;
+  }
+
+  // Set the material of the pieces to 0.
+  for (let i = 0; i < 2; i++) {
+    chessBoard.material[i] = 0;
+  }
+
+  // Set the type of the pieces to 0.
+  for (let i = 0; i < 13; i++) {
+    chessBoard.pieceNumber[i] = 0;
+  }
+
   let piece, square, colour;
 
   for (let i = 0; i < 64; i++) {
@@ -216,6 +233,7 @@ function updatePieceMaterial(): void {
     piece = chessBoard.pieces[square];
 
     if (piece !== PIECES.EMPTY) {
+      console.log("Piece: " + piece + ", on " + square);
       colour = pieceColour[piece];
 
       chessBoard.material[colour] += pieceValue[piece];
@@ -237,21 +255,6 @@ function resetBoard(): void {
   // Set the squares of the 64 grid actual chess board as empty.
   for (let i = 0; i < 64; i++) {
     chessBoard.pieces[to120(i)] = PIECES.EMPTY;
-  }
-
-  // Set the pieces in the pieceList to EMPTY.
-  for (let i = 0; i < 14 * 10; i++) {
-    chessBoard.pieceList[i] = PIECES.EMPTY;
-  }
-
-  // Set the material of the pieces to 0.
-  for (let i = 0; i < 2; i++) {
-    chessBoard.material[i] = 0;
-  }
-
-  // Set the type of the pieces to 0.
-  for (let i = 0; i < 13; i++) {
-    chessBoard.pieceNumber[i] = 0;
   }
 
   // Reset other properties.
