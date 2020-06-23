@@ -289,3 +289,8 @@ function to64(index: number): number {
 function to120(index: number): number {
   return _64To120[index];
 }
+
+// Return piece index.
+function getPieceIndex(piece: number, pieceNum: number): number {
+  return piece * 10 + pieceNum;
+}

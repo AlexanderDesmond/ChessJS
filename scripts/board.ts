@@ -39,9 +39,11 @@ chessBoard.moveScores = []; // Length: 64 * 256
 chessBoard.moveListStart = []; // Length: 64
 
 // Return piece index.
+/*
 function getPieceIndex(piece: number, pieceNum: number): number {
   return piece * 10 + pieceNum;
 }
+*/
 
 // Generate boardState UID.
 function generateBoardState(): number {
