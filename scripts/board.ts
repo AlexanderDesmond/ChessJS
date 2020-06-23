@@ -233,7 +233,6 @@ function updatePieces(): void {
     piece = chessBoard.pieces[square];
 
     if (piece !== PIECES.EMPTY) {
-      console.log("Piece: " + piece + ", on " + square);
       colour = pieceColour[piece];
 
       chessBoard.material[colour] += pieceValue[piece];
@@ -241,6 +240,25 @@ function updatePieces(): void {
         getPieceIndex(piece, chessBoard.pieceNumber[piece])
       ] = square;
       chessBoard.pieceNumber[piece]++;
+    }
+  }
+
+  printPieces();
+}
+
+function printPieces(): void {
+  for (let piece = PIECES.wP; piece <= PIECES.bK; piece++) {
+    for (
+      let pieceNum = 0;
+      pieceNum < chessBoard.pieceNumber[piece];
+      pieceNum++
+    ) {
+      console.log(
+        "Piece: " +
+          pieceChar[piece] +
+          ", on " +
+          squareToString(chessBoard.pieceList[getPieceIndex(piece, pieceNum)])
+      );
     }
   }
 }
