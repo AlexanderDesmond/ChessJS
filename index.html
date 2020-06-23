@@ -17,8 +17,10 @@
     <main>
       <div class="fen-container">
         <p>FEN (Forsyth-Edwards Notation):</p>
-        <input type="text" name="" class="fen-text" />
-        <button type="button">Set Board Position</button>
+        <input type="text" name="" id="fen-text" />
+        <button type="button" onclick="submitFen()">
+          Set Board Position
+        </button>
       </div>
       <div class="board-container"></div>
     </main>
