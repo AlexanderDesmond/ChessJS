@@ -307,6 +307,19 @@ function isSquareUnderAttack(square: number, side: number): boolean {
     }
   }
 
+  // If the square is under attack by a knight or knights
+  for (let i = 0; i < 8; i++) {
+    piece = chessBoard.pieceList[square + knightDirections[i]];
+
+    if (
+      piece !== SQUARES.OFFBOARD &&
+      pieceColour[piece] === side &&
+      isKing[piece] === true
+    ) {
+      return true;
+    }
+  }
+
   return false;
 }
 
