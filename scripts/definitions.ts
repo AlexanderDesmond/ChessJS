@@ -255,6 +255,12 @@ const doesSlide: boolean[] = [
   false,
 ];
 
+// Piece directions
+const knightDirections = [-8, -19, -21, -12, 8, 19, 21, 12];
+const rookDirections = [-1, -10, 1, 10];
+const bishopDirections = [-9, -11, 11, 9];
+const kingDirections = [-1, -10, 1, 10, -9, -11, 11, 9];
+
 // Parts of boardState uid
 const pieceKeys: number[] = [];
 const sideKey: number = generateRandomNumber();
