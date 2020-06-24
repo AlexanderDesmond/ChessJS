@@ -207,6 +207,8 @@ function parseFen(fen: string) {
   chessBoard.boardState = generateBoardState();
   // Set piece material
   updatePieces();
+
+  printSquareUnderAttack();
 }
 
 // Update the material of the pieces.
@@ -372,6 +374,25 @@ function isSquareUnderAttack(square: number, side: number): boolean {
   }
 
   return false;
+}
+
+function printSquareUnderAttack(): void {
+  let square, piece;
+
+  console.log("Squares under attack:\n");
+
+  for (let rank = RANKS.RANK_8; rank >= RANKS.RANK_1; rank--) {
+    var line = rank + 1 + "  ";
+    for (let file = FILES.FILE_A; file <= FILES.FILE_H; file++) {
+      square = getSquare(file, rank);
+      if (isSquareUnderAttack(square, chessBoard.side)) piece = "X";
+      else piece = "-";
+      line += " " + piece + " ";
+    }
+    console.log(line);
+  }
+
+  console.log("");
 }
 
 function printBoard(): void {
