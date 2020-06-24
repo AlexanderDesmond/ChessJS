@@ -288,7 +288,7 @@ function resetBoard(): void {
 
 // Returns true if the given square is under attack.
 function isSquareUnderAttack(square: number, side: number): boolean {
-  let piece, sq;
+  let piece, dir, sq;
 
   // If the square is under attack by a pawn or pawns.
   if (side === COLOURS.WHITE) {
@@ -317,6 +317,44 @@ function isSquareUnderAttack(square: number, side: number): boolean {
       isKing[piece] === true
     ) {
       return true;
+    }
+  }
+
+  // If the square is under attack by a rook or queen
+  for (let i = 0; i < 4; i++) {
+    dir = rookAndQueenDirections[i];
+    sq = square + dir;
+    piece = chessBoard.pieceList[sq];
+
+    while (piece !== SQUARES.OFFBOARD) {
+      // If you come across a piece.
+      if (piece !== PIECES.EMPTY) {
+        if (isRookOrQueen[piece] === true && pieceColour[piece] === side) {
+          return true;
+        }
+        break;
+      }
+      sq += dir;
+      piece = chessBoard.pieceList[sq];
+    }
+  }
+
+  // If the square is under attack by a bishop or queen
+  for (let i = 0; i < 4; i++) {
+    dir = bishopAndQueenDirections[i];
+    sq = square + dir;
+    piece = chessBoard.pieceList[sq];
+
+    while (piece !== SQUARES.OFFBOARD) {
+      // If you come across a piece.
+      if (piece !== PIECES.EMPTY) {
+        if (isBishopOrQueen[piece] === true && pieceColour[piece] === side) {
+          return true;
+        }
+        break;
+      }
+      sq += dir;
+      piece = chessBoard.pieceList[sq];
     }
   }
 
