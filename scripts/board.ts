@@ -290,6 +290,23 @@ function resetBoard(): void {
 function isSquareUnderAttack(square: number, side: number): boolean {
   let piece, sq;
 
+  // If the square is under attack by a pawn or pawns.
+  if (side === COLOURS.WHITE) {
+    if (
+      chessBoard.pieceList[square - 11] === PIECES.wP ||
+      chessBoard.pieceList[square - 9] === PIECES.wP
+    ) {
+      return true;
+    }
+  } else if (side === COLOURS.BLACK) {
+    if (
+      chessBoard.pieceList[square + 11] === PIECES.bP ||
+      chessBoard.pieceList[square + 9] === PIECES.bP
+    ) {
+      return true;
+    }
+  }
+
   return false;
 }
 
