@@ -314,7 +314,7 @@ function isSquareUnderAttack(square: number, side: number): boolean {
     if (
       piece !== SQUARES.OFFBOARD &&
       pieceColour[piece] === side &&
-      isKing[piece] === true
+      isKnight[piece] === true
     ) {
       return true;
     }
@@ -355,6 +355,19 @@ function isSquareUnderAttack(square: number, side: number): boolean {
       }
       sq += dir;
       piece = chessBoard.pieceList[sq];
+    }
+  }
+
+  // If the square is under attack by a king
+  for (let i = 0; i < 8; i++) {
+    piece = chessBoard.pieceList[square + kingDirections[i]];
+
+    if (
+      piece !== SQUARES.OFFBOARD &&
+      pieceColour[piece] === side &&
+      isKing[piece] === true
+    ) {
+      return true;
     }
   }
 
