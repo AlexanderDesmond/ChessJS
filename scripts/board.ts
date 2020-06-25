@@ -292,77 +292,77 @@ function resetBoard(): void {
 function isSquareUnderAttack(square: number, side: number): boolean {
   let piece, dir, sq;
 
-  // If the square is under attack by a pawn or pawns.
+  // If the square is under attack by a Pawn.
   if (side === COLOURS.WHITE) {
     if (
-      chessBoard.pieceList[square - 11] === PIECES.wP ||
-      chessBoard.pieceList[square - 9] === PIECES.wP
+      chessBoard.pieces[square - 11] === PIECES.wP ||
+      chessBoard.pieces[square - 9] === PIECES.wP
     ) {
       return true;
     }
-  } else if (side === COLOURS.BLACK) {
+  } else {
     if (
-      chessBoard.pieceList[square + 11] === PIECES.bP ||
-      chessBoard.pieceList[square + 9] === PIECES.bP
+      chessBoard.pieces[square + 11] === PIECES.bP ||
+      chessBoard.pieces[square + 9] === PIECES.bP
     ) {
       return true;
     }
   }
 
-  // If the square is under attack by a knight or knights
+  // If the square is under attack by a Knight.
   for (let i = 0; i < 8; i++) {
-    piece = chessBoard.pieceList[square + knightDirections[i]];
+    piece = chessBoard.pieces[square + knightDirections[i]];
 
     if (
       piece !== SQUARES.OFFBOARD &&
-      pieceColour[piece] === side &&
+      chessBoard[piece] === side &&
       isKnight[piece] === true
     ) {
       return true;
     }
   }
 
-  // If the square is under attack by a rook or queen
-  for (let i = 0; i < 4; i++) {
+  // If the square is under attack by a Rook or Queen.
+  for (let i = 0; i < 4; ++i) {
     dir = rookAndQueenDirections[i];
     sq = square + dir;
-    piece = chessBoard.pieceList[sq];
+    piece = chessBoard.pieces[sq];
 
     while (piece !== SQUARES.OFFBOARD) {
-      // If you come across a piece.
       if (piece !== PIECES.EMPTY) {
         if (isRookOrQueen[piece] === true && pieceColour[piece] === side) {
           return true;
         }
         break;
       }
+
       sq += dir;
-      piece = chessBoard.pieceList[sq];
+      piece = chessBoard.pieces[sq];
     }
   }
 
-  // If the square is under attack by a bishop or queen
-  for (let i = 0; i < 4; i++) {
+  // If the square is under attack by a Bishop or Queen.
+  for (let i = 0; i < 4; ++i) {
     dir = bishopAndQueenDirections[i];
     sq = square + dir;
-    piece = chessBoard.pieceList[sq];
+    piece = chessBoard.pieces[sq];
 
     while (piece !== SQUARES.OFFBOARD) {
-      // If you come across a piece.
       if (piece !== PIECES.EMPTY) {
         if (isBishopOrQueen[piece] === true && pieceColour[piece] === side) {
           return true;
         }
         break;
       }
+
       sq += dir;
-      piece = chessBoard.pieceList[sq];
+      piece = chessBoard.pieces[sq];
     }
   }
 
-  // If the square is under attack by a king
+  // If the square is under attack by a King.
   for (let i = 0; i < 8; i++) {
-    piece = chessBoard.pieceList[square + kingDirections[i]];
+    piece = chessBoard.pieces[square + kingDirections[i]];
 
     if (
       piece !== SQUARES.OFFBOARD &&
@@ -385,8 +385,13 @@ function printSquareUnderAttack(): void {
     var line = rank + 1 + "  ";
     for (let file = FILES.FILE_A; file <= FILES.FILE_H; file++) {
       square = getSquare(file, rank);
-      if (isSquareUnderAttack(square, chessBoard.side)) piece = "X";
-      else piece = "-";
+
+      if (isSquareUnderAttack(square, chessBoard.side)) {
+        piece = "X";
+      } else {
+        piece = "-";
+      }
+
       line += " " + piece + " ";
     }
     console.log(line);
