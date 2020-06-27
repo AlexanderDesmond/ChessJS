@@ -379,7 +379,7 @@ function isSquareUnderAttack(square: number, side: number): boolean {
 function printSquareUnderAttack(): void {
   let square, piece;
 
-  console.log("Squares under attack:\n");
+  console.log("\nSquares under attack:\n");
 
   for (let rank = RANKS.RANK_8; rank >= RANKS.RANK_1; rank--) {
     var line = rank + 1 + "  ";
@@ -396,14 +396,12 @@ function printSquareUnderAttack(): void {
     }
     console.log(line);
   }
-
-  console.log("");
 }
 
 function printBoard(): void {
   let square, piece;
 
-  console.log("Chess Board\n\n");
+  console.log("\nChess Board\n");
 
   for (let rank = RANKS.RANK_8; rank >= RANKS.RANK_1; rank--) {
     let line = rankChar[rank] + "    ";
