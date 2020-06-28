@@ -3,6 +3,8 @@ init();
 parseFen(START_FEN);
 printBoard();
 
+generateMoves(); // for testing
+
 function init(): void {
   rankAndFilesInit();
   boardStateInit();
