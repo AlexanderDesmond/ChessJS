@@ -256,12 +256,12 @@ const doesSlide: boolean[] = [
 ];
 
 // Piece directions
-const knightDirections = [-8, -19, -21, -12, 8, 19, 21, 12];
-const rookAndQueenDirections = [-1, -10, 1, 10];
-const bishopAndQueenDirections = [-9, -11, 11, 9];
-const kingDirections = [-1, -10, 1, 10, -9, -11, 11, 9];
+const knightDirections: number[] = [-8, -19, -21, -12, 8, 19, 21, 12];
+const rookAndQueenDirections: number[] = [-1, -10, 1, 10];
+const bishopAndQueenDirections: number[] = [-9, -11, 11, 9];
+const kingDirections: number[] = [-1, -10, 1, 10, -9, -11, 11, 9];
 //
-const directionNumbers = [0, 0, 8, 4, 4, 8, 8, 0, 8, 4, 4, 8, 8];
+const directionNumbers: number[] = [0, 0, 8, 4, 4, 8, 8, 0, 8, 4, 4, 8, 8];
 const pieceDirections: number[][] = [
   [0],
   [0],
@@ -277,8 +277,15 @@ const pieceDirections: number[][] = [
   kingDirections,
   kingDirections,
 ];
-const nonSlidingPieces = [PIECES.wN, PIECES.wK, 0, PIECES.bN, PIECES.bK, 0];
-const nonSlidingPiecesIndices = [0, 3];
+const nonSlidingPieces: number[] = [
+  PIECES.wN,
+  PIECES.wK,
+  0,
+  PIECES.bN,
+  PIECES.bK,
+  0,
+];
+const nonSlidingPiecesIndices: number[] = [0, 3];
 
 // Parts of boardState uid
 const pieceKeys: number[] = [];
