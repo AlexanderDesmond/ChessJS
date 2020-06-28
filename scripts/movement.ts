@@ -16,7 +16,8 @@ function generateMoves(): void {
   chessBoard.moveListStart[chessBoard.plyCount + 1] =
     chessBoard.moveListStart[chessBoard.plyCount];
 
-  let pieceType, sq;
+  let pieceType, square;
+  let piece, sq, index;
 
   // Pawn move generation.
   if (chessBoard.side === COLOURS.WHITE) {
@@ -29,16 +30,16 @@ function generateMoves(): void {
       pieceNum < chessBoard.pieceNumber[pieceType];
       pieceType++
     ) {
-      sq = chessBoard.pieceList[getPieceIndex(pieceType, pieceNum)];
+      square = chessBoard.pieceList[getPieceIndex(pieceType, pieceNum)];
 
       // If the square in front of the pawn is empty.
-      if (chessBoard.pieces[sq + 10] === PIECES.EMPTY) {
+      if (chessBoard.pieces[square + 10] === PIECES.EMPTY) {
         // Add pawn move.
 
         // If the pawn is on the second rank and square two ranks in front is empty.
         if (
-          ranks[sq] === RANKS.RANK_2 &&
-          chessBoard.pieces[sq + 20] === PIECES.EMPTY
+          ranks[square] === RANKS.RANK_2 &&
+          chessBoard.pieces[square + 20] === PIECES.EMPTY
         ) {
           // Add quiet move
         }
@@ -46,24 +47,24 @@ function generateMoves(): void {
 
       // Pawn capture moves.
       if (
-        !isSquareOffBoard(sq + 9) &&
-        pieceColour[chessBoard.pieces[sq + 9]] === COLOURS.BLACK
+        !isSquareOffBoard(square + 9) &&
+        pieceColour[chessBoard.pieces[square + 9]] === COLOURS.BLACK
       ) {
         // Add pawn capture move.
       }
       if (
-        !isSquareOffBoard(sq + 11) &&
-        pieceColour[chessBoard.pieces[sq + 11]] === COLOURS.BLACK
+        !isSquareOffBoard(square + 11) &&
+        pieceColour[chessBoard.pieces[square + 11]] === COLOURS.BLACK
       ) {
         // Add pawn capture move.
       }
 
       // En Passant captures.
       if (chessBoard.enPassant !== SQUARES.NO_SQUARE) {
-        if (sq + 9 === chessBoard.enPassant) {
+        if (square + 9 === chessBoard.enPassant) {
           // Add En Passant move.
         }
-        if (sq + 11 === chessBoard.enPassant) {
+        if (square + 11 === chessBoard.enPassant) {
           // Add En Passant move.
         }
       }
@@ -101,8 +102,6 @@ function generateMoves(): void {
         }
       }
     }
-
-    pieceType = PIECES.wN;
   } else if (chessBoard.side === COLOURS.BLACK) {
     pieceType = PIECES.bP;
 
@@ -112,16 +111,16 @@ function generateMoves(): void {
       pieceNum < chessBoard.pieceNumber[pieceType];
       pieceType++
     ) {
-      sq = chessBoard.pieceList[getPieceIndex(pieceType, pieceNum)];
+      square = chessBoard.pieceList[getPieceIndex(pieceType, pieceNum)];
 
       // If the square in front of the pawn is empty.
-      if (chessBoard.pieces[sq - 10] === PIECES.EMPTY) {
+      if (chessBoard.pieces[square - 10] === PIECES.EMPTY) {
         // Add pawn move.
 
         // If the pawn is on the seventh rank and square two ranks in front is empty.
         if (
-          ranks[sq] === RANKS.RANK_7 &&
-          chessBoard.pieces[sq - 20] === PIECES.EMPTY
+          ranks[square] === RANKS.RANK_7 &&
+          chessBoard.pieces[square - 20] === PIECES.EMPTY
         ) {
           // Add quiet move
         }
@@ -129,24 +128,24 @@ function generateMoves(): void {
 
       // Pawn capture moves.
       if (
-        !isSquareOffBoard(sq - 9) &&
-        pieceColour[chessBoard.pieces[sq - 9]] === COLOURS.WHITE
+        !isSquareOffBoard(square - 9) &&
+        pieceColour[chessBoard.pieces[square - 9]] === COLOURS.WHITE
       ) {
         // Add pawn capture move.
       }
       if (
-        !isSquareOffBoard(sq - 11) &&
-        pieceColour[chessBoard.pieces[sq - 11]] === COLOURS.WHITE
+        !isSquareOffBoard(square - 11) &&
+        pieceColour[chessBoard.pieces[square - 11]] === COLOURS.WHITE
       ) {
         // Add pawn capture move.
       }
 
       // En Passant captures.
       if (chessBoard.enPassant !== SQUARES.NO_SQUARE) {
-        if (sq - 9 === chessBoard.enPassant) {
+        if (square - 9 === chessBoard.enPassant) {
           // Add En Passant move.
         }
-        if (sq - 11 === chessBoard.enPassant) {
+        if (square - 11 === chessBoard.enPassant) {
           // Add En Passant move.
         }
       }
@@ -184,7 +183,5 @@ function generateMoves(): void {
         }
       }
     }
-
-    pieceType = PIECES.bN;
   }
 }
