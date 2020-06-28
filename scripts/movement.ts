@@ -45,10 +45,16 @@ function generateMoves(): void {
       }
 
       // Pawn capture moves.
-      if (pieceColour[chessBoard.pieces[sq + 9]] === COLOURS.BLACK) {
+      if (
+        !isSquareOffBoard(sq + 9) &&
+        pieceColour[chessBoard.pieces[sq + 9]] === COLOURS.BLACK
+      ) {
         // Add pawn capture move.
       }
-      if (pieceColour[chessBoard.pieces[sq + 11]] === COLOURS.BLACK) {
+      if (
+        !isSquareOffBoard(sq + 11) &&
+        pieceColour[chessBoard.pieces[sq + 11]] === COLOURS.BLACK
+      ) {
         // Add pawn capture move.
       }
 
@@ -122,10 +128,16 @@ function generateMoves(): void {
       }
 
       // Pawn capture moves.
-      if (pieceColour[chessBoard.pieces[sq - 9]] === COLOURS.WHITE) {
+      if (
+        !isSquareOffBoard(sq - 9) &&
+        pieceColour[chessBoard.pieces[sq - 9]] === COLOURS.WHITE
+      ) {
         // Add pawn capture move.
       }
-      if (pieceColour[chessBoard.pieces[sq - 11]] === COLOURS.WHITE) {
+      if (
+        !isSquareOffBoard(sq - 11) &&
+        pieceColour[chessBoard.pieces[sq - 11]] === COLOURS.WHITE
+      ) {
         // Add pawn capture move.
       }
 
