@@ -302,14 +302,14 @@ function getPieceIndex(piece: number, pieceNum: number): number {
 }
 
 // Flags for En Passant, Pawn starting move, and castling
-const EP_FLAG = 0x40000;
-const START_FLAG = 0x80000;
-const CASTLE_FLAG = 0x1000000;
+const EP_FLAG: number = 0x40000;
+const START_FLAG: number = 0x80000;
+const CASTLE_FLAG: number = 0x1000000;
 // Flags for captured and promoted pieces.
-const CAPTURED_FLAG = 0x7c000;
-const PROMOTION_FLAG = 0xf00000;
+const CAPTURED_FLAG: number = 0x7c000;
+const PROMOTION_FLAG: number = 0xf00000;
 // If there was no move.
-const NO_MOVE = 0;
+const NO_MOVE: number = 0;
 
 // Return the origin square of a piece.
 function getOriginSquare(move: number): number {
