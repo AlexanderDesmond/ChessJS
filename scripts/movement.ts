@@ -17,7 +17,7 @@ function generateMoves(): void {
     chessBoard.moveListStart[chessBoard.plyCount];
 
   let pieceType, square;
-  let piece, sq, index;
+  let piece, sq, dir, index;
 
   // Pawn move generation.
   if (chessBoard.side === COLOURS.WHITE) {
@@ -183,5 +183,43 @@ function generateMoves(): void {
         }
       }
     }
+  }
+
+  // Non-sliding piece moves.
+  index = nonSlidingPiecesIndices[chessBoard.side];
+  piece = nonSlidingPieces[index++];
+
+  while (piece !== 0) {
+    for (
+      let pieceNum = 0;
+      pieceNum < chessBoard.pieceNumber[piece];
+      pieceNum++
+    ) {
+      // Get the square that the piece is currently on.
+      square = chessBoard.pieceList[getPieceIndex(piece, pieceNum)];
+
+      // Go through all possible movement directions.
+      for (let i = 0; i < directionNumbers[piece]; i++) {
+        dir = pieceDirections[piece][i];
+
+        // Target square = square + direction
+        sq = square + dir;
+
+        if (isSquareOffBoard(sq)) {
+          continue;
+        }
+
+        if (chessBoard.pieces[sq] !== PIECES.EMPTY) {
+          if (pieceColour[chessBoard.pieces[sq]] !== chessBoard.side) {
+            // Add capture move.
+          }
+        } else {
+          // Add quiet move.
+        }
+      }
+    }
+
+    // Get next piece.
+    piece = nonSlidingPieces[index++];
   }
 }

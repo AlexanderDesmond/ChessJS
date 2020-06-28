@@ -262,15 +262,15 @@ const bishopAndQueenDirections = [-9, -11, 11, 9];
 const kingDirections = [-1, -10, 1, 10, -9, -11, 11, 9];
 //
 const directionNumbers = [0, 0, 8, 4, 4, 8, 8, 0, 8, 4, 4, 8, 8];
-const pieceDirections = [
-  0,
-  0,
+const pieceDirections: number[][] = [
+  [0],
+  [0],
   knightDirections,
   bishopAndQueenDirections,
   rookAndQueenDirections,
   kingDirections,
   kingDirections,
-  0,
+  [0],
   knightDirections,
   bishopAndQueenDirections,
   rookAndQueenDirections,
