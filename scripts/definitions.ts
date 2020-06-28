@@ -330,3 +330,9 @@ function getCapturedPiece(move: number): number {
 function getPromotedPiece(move: number): number {
   return (move >> 20) & 0xf;
 }
+
+// Returns true if the square is off the board, returns false otherwise.
+function isSquareOffBoard(square: number): boolean {
+  if (files[square] === SQUARES.OFFBOARD) return true;
+  else return false;
+}
