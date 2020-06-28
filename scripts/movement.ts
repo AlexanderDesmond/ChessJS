@@ -63,6 +63,39 @@ function generateMoves(): void {
       }
     }
 
+    // Handle castling moves.
+    // Handle kingside castling.
+    if (chessBoard.castling & CASTLE_BIT.WKCA) {
+      // If F1 and G1 are empty.
+      if (
+        chessBoard.pieces[SQUARES.F1] === PIECES.EMPTY &&
+        chessBoard.pieces[SQUARES.G1] === PIECES.EMPTY
+      ) {
+        if (
+          !isSquareUnderAttack(SQUARES.F1, COLOURS.BLACK) &&
+          isSquareUnderAttack(SQUARES.E1, COLOURS.BLACK)
+        ) {
+          // Add quiet move.
+        }
+      }
+    }
+    // Handle queenside castling.
+    if (chessBoard.castling & CASTLE_BIT.WQCA) {
+      // If F1 and G1 are empty.
+      if (
+        chessBoard.pieces[SQUARES.D1] === PIECES.EMPTY &&
+        chessBoard.pieces[SQUARES.C1] === PIECES.EMPTY &&
+        chessBoard.pieces[SQUARES.B1] === PIECES.EMPTY
+      ) {
+        if (
+          !isSquareUnderAttack(SQUARES.D1, COLOURS.BLACK) &&
+          isSquareUnderAttack(SQUARES.E1, COLOURS.BLACK)
+        ) {
+          // Add quiet move.
+        }
+      }
+    }
+
     pieceType = PIECES.wN;
   } else if (chessBoard.side === COLOURS.BLACK) {
     pieceType = PIECES.bP;
@@ -103,6 +136,39 @@ function generateMoves(): void {
         }
         if (sq - 11 === chessBoard.enPassant) {
           // Add En Passant move.
+        }
+      }
+    }
+
+    // Handle castling moves.
+    // Handle kingside castling.
+    if (chessBoard.castling & CASTLE_BIT.BKCA) {
+      // If F1 and G1 are empty.
+      if (
+        chessBoard.pieces[SQUARES.F8] === PIECES.EMPTY &&
+        chessBoard.pieces[SQUARES.G8] === PIECES.EMPTY
+      ) {
+        if (
+          !isSquareUnderAttack(SQUARES.F8, COLOURS.WHITE) &&
+          isSquareUnderAttack(SQUARES.E8, COLOURS.WHITE)
+        ) {
+          // Add quiet move.
+        }
+      }
+    }
+    // Handle queenside castling.
+    if (chessBoard.castling & CASTLE_BIT.BQCA) {
+      // If F1 and G1 are empty.
+      if (
+        chessBoard.pieces[SQUARES.D8] === PIECES.EMPTY &&
+        chessBoard.pieces[SQUARES.C8] === PIECES.EMPTY &&
+        chessBoard.pieces[SQUARES.B8] === PIECES.EMPTY
+      ) {
+        if (
+          !isSquareUnderAttack(SQUARES.D8, COLOURS.WHITE) &&
+          isSquareUnderAttack(SQUARES.E8, COLOURS.WHITE)
+        ) {
+          // Add quiet move.
         }
       }
     }
