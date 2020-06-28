@@ -26,3 +26,6 @@ const CASTLE_FLAG = 0x1000000;
 // Flags for captured and promoted pieces.
 const CAPTURED_FLAG = 0x7c000;
 const PROMOTION_FLAG = 0xf00000;
+
+// If there was no move.
+const NO_MOVE = 0;
