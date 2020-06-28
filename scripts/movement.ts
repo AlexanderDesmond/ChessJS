@@ -17,3 +17,8 @@ function getCapturedPiece(move: number): number {
 function getPromotedPiece(move: number): number {
   return (move >> 20) & 0xf;
 }
+
+// Add flags for En Passant, Pawn starting move, and castling
+const EP_FLAG = 0x40000;
+const START_FLAG = 0x80000;
+const CASTLE_FLAG = 0x1000000;
