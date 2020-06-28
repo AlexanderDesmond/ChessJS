@@ -1,5 +1,5 @@
 // Generate move data.
-function generateMove(
+function move(
   origin: number,
   destination: number,
   captured: number,
