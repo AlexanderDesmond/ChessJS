@@ -2,6 +2,20 @@ function squareToString(square: number): string {
   return fileChar[files[square]] + rankChar[ranks[square]];
 }
 
+function printMoveList(): void {
+  let move;
+  console.log("Move List:");
+
+  for (
+    let i = chessBoard.moveListStart[chessBoard.plyCount];
+    i < chessBoard.moveListStart[chessBoard.plyCount + 1];
+    i++
+  ) {
+    move = chessBoard.moveList[i];
+    console.log(moveToString(move));
+  }
+}
+
 function moveToString(move: number): void {
   let s;
 
