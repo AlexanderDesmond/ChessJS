@@ -62,10 +62,16 @@ function generateMoves(): void {
       // En Passant captures.
       if (chessBoard.enPassant !== SQUARES.NO_SQUARE) {
         if (square + 9 === chessBoard.enPassant) {
-          // Add En Passant move.
+          // Take En Passant move.
+          enPassantMove(
+            toMoveData(square, square + 9, PIECES.EMPTY, PIECES.EMPTY, EP_FLAG)
+          );
         }
         if (square + 11 === chessBoard.enPassant) {
-          // Add En Passant move.
+          // Take En Passant move.
+          enPassantMove(
+            toMoveData(square, square + 11, PIECES.EMPTY, PIECES.EMPTY, EP_FLAG)
+          );
         }
       }
     }
@@ -161,10 +167,16 @@ function generateMoves(): void {
       // En Passant captures.
       if (chessBoard.enPassant !== SQUARES.NO_SQUARE) {
         if (square - 9 === chessBoard.enPassant) {
-          // Add En Passant move.
+          // Take En Passant move.
+          enPassantMove(
+            toMoveData(square, square - 9, PIECES.EMPTY, PIECES.EMPTY, EP_FLAG)
+          );
         }
         if (square - 11 === chessBoard.enPassant) {
-          // Add En Passant move.
+          // Take En Passant move.
+          enPassantMove(
+            toMoveData(square, square - 11, PIECES.EMPTY, PIECES.EMPTY, EP_FLAG)
+          );
         }
       }
     }
