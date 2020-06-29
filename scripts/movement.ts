@@ -222,4 +222,41 @@ function generateMoves(): void {
     // Get next piece.
     piece = nonSlidingPieces[index++];
   }
+
+  // Sliding piece moves.
+  index = slidingPiecesIndices[chessBoard.side];
+  piece = slidingPieces[index++];
+
+  while (piece !== 0) {
+    for (
+      let pieceNum = 0;
+      pieceNum < chessBoard.pieceNumber[piece];
+      pieceNum++
+    ) {
+      // Get the square that the piece is currently on.
+      square = chessBoard.pieceList[getPieceIndex(piece, pieceNum)];
+
+      // Go through all possible movement directions.
+      for (let i = 0; i < directionNumbers[piece]; i++) {
+        dir = pieceDirections[piece][i];
+
+        // Target square = square + direction
+        sq = square + dir;
+
+        while (!isSquareOffBoard(sq)) {
+          if (chessBoard.pieces[sq] !== PIECES.EMPTY) {
+            if (pieceColour[chessBoard.pieces[sq]] !== chessBoard.side) {
+              // Add capture move.
+            }
+            break;
+          }
+          // Add quiet move.
+          sq += dir;
+        }
+      }
+    }
+
+    // Get next piece.
+    piece = slidingPieces[index++];
+  }
 }
