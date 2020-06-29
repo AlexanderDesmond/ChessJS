@@ -28,7 +28,7 @@ function generateMoves(): void {
     for (
       let pieceNum = 0;
       pieceNum < chessBoard.pieceNumber[pieceType];
-      pieceType++
+      pieceNum++
     ) {
       square = chessBoard.pieceList[getPieceIndex(pieceType, pieceNum)];
 
@@ -142,7 +142,7 @@ function generateMoves(): void {
     for (
       let pieceNum = 0;
       pieceNum < chessBoard.pieceNumber[pieceType];
-      pieceType++
+      pieceNum++
     ) {
       square = chessBoard.pieceList[getPieceIndex(pieceType, pieceNum)];
 
