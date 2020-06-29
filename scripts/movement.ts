@@ -1,5 +1,5 @@
 // Generate move data.
-function move(
+function toMoveData(
   origin: number,
   destination: number,
   captured: number,
@@ -211,10 +211,14 @@ function generateMoves(): void {
 
         if (chessBoard.pieces[sq] !== PIECES.EMPTY) {
           if (pieceColour[chessBoard.pieces[sq]] !== chessBoard.side) {
-            // Add capture move.
+            // Take capture move.
+            captureMove(
+              toMoveData(square, sq, chessBoard.pieces[sq], PIECES.EMPTY, 0)
+            );
           }
         } else {
-          // Add quiet move.
+          // Take quiet move.
+          quietMove(toMoveData(square, sq, PIECES.EMPTY, PIECES.EMPTY, 0));
         }
       }
     }
@@ -246,11 +250,16 @@ function generateMoves(): void {
         while (!isSquareOffBoard(sq)) {
           if (chessBoard.pieces[sq] !== PIECES.EMPTY) {
             if (pieceColour[chessBoard.pieces[sq]] !== chessBoard.side) {
-              // Add capture move.
+              // Take capture move.
+              captureMove(
+                toMoveData(square, sq, chessBoard.pieces[sq], PIECES.EMPTY, 0)
+              );
             }
             break;
           }
-          // Add quiet move.
+          // Take quiet move.
+          quietMove(toMoveData(square, sq, PIECES.EMPTY, PIECES.EMPTY, 0));
+
           sq += dir;
         }
       }
