@@ -286,6 +286,17 @@ const nonSlidingPieces: number[] = [
   0,
 ];
 const nonSlidingPiecesIndices: number[] = [0, 3];
+const slidingPieces: number[] = [
+  PIECES.wB,
+  PIECES.wR,
+  PIECES.wQ,
+  0,
+  PIECES.bB,
+  PIECES.bR,
+  PIECES.bQ,
+  0,
+];
+const slidingPiecesIndices: number[] = [0, 4];
 
 // Parts of boardState uid
 const pieceKeys: number[] = [];
