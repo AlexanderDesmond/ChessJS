@@ -82,7 +82,16 @@ function generateMoves(): void {
           !isSquareUnderAttack(SQUARES.F1, COLOURS.BLACK) &&
           isSquareUnderAttack(SQUARES.E1, COLOURS.BLACK)
         ) {
-          // Add quiet move.
+          // Take quiet move.
+          quietMove(
+            toMoveData(
+              SQUARES.E1,
+              SQUARES.G1,
+              PIECES.EMPTY,
+              PIECES.EMPTY,
+              CASTLE_FLAG
+            )
+          );
         }
       }
     }
@@ -98,7 +107,16 @@ function generateMoves(): void {
           !isSquareUnderAttack(SQUARES.D1, COLOURS.BLACK) &&
           isSquareUnderAttack(SQUARES.E1, COLOURS.BLACK)
         ) {
-          // Add quiet move.
+          // Take quiet move.
+          quietMove(
+            toMoveData(
+              SQUARES.E1,
+              SQUARES.C1,
+              PIECES.EMPTY,
+              PIECES.EMPTY,
+              CASTLE_FLAG
+            )
+          );
         }
       }
     }
@@ -163,7 +181,16 @@ function generateMoves(): void {
           !isSquareUnderAttack(SQUARES.F8, COLOURS.WHITE) &&
           isSquareUnderAttack(SQUARES.E8, COLOURS.WHITE)
         ) {
-          // Add quiet move.
+          // Take quiet move.
+          quietMove(
+            toMoveData(
+              SQUARES.E8,
+              SQUARES.G8,
+              PIECES.EMPTY,
+              PIECES.EMPTY,
+              CASTLE_FLAG
+            )
+          );
         }
       }
     }
@@ -179,7 +206,16 @@ function generateMoves(): void {
           !isSquareUnderAttack(SQUARES.D8, COLOURS.WHITE) &&
           isSquareUnderAttack(SQUARES.E8, COLOURS.WHITE)
         ) {
-          // Add quiet move.
+          // Take quiet move.
+          quietMove(
+            toMoveData(
+              SQUARES.E8,
+              SQUARES.C8,
+              PIECES.EMPTY,
+              PIECES.EMPTY,
+              CASTLE_FLAG
+            )
+          );
         }
       }
     }
