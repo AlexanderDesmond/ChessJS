@@ -41,7 +41,16 @@ function generateMoves(): void {
           ranks[square] === RANKS.RANK_2 &&
           chessBoard.pieces[square + 20] === PIECES.EMPTY
         ) {
-          // Add quiet move
+          // Take double move.
+          quietMove(
+            toMoveData(
+              square,
+              square + 20,
+              PIECES.EMPTY,
+              PIECES.EMPTY,
+              START_FLAG
+            )
+          );
         }
       }
 
@@ -146,7 +155,16 @@ function generateMoves(): void {
           ranks[square] === RANKS.RANK_7 &&
           chessBoard.pieces[square - 20] === PIECES.EMPTY
         ) {
-          // Add quiet move
+          // Take double move.
+          quietMove(
+            toMoveData(
+              square,
+              square - 20,
+              PIECES.EMPTY,
+              PIECES.EMPTY,
+              START_FLAG
+            )
+          );
         }
       }
 
