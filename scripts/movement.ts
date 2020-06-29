@@ -401,3 +401,27 @@ function blackPawnCaptureMove(
     captureMove(toMoveData(origin, destination, captured, PIECES.EMPTY, 0));
   }
 }
+
+// Handles white pawn quiet moves.
+function whitePawnQuietMove(origin: number, destination: number): void {
+  if (ranks[origin] === RANKS.RANK_7) {
+    quietMove(toMoveData(origin, destination, PIECES.EMPTY, PIECES.wQ, 0));
+    quietMove(toMoveData(origin, destination, PIECES.EMPTY, PIECES.wR, 0));
+    quietMove(toMoveData(origin, destination, PIECES.EMPTY, PIECES.wB, 0));
+    quietMove(toMoveData(origin, destination, PIECES.EMPTY, PIECES.wN, 0));
+  } else {
+    quietMove(toMoveData(origin, destination, PIECES.EMPTY, PIECES.EMPTY, 0));
+  }
+}
+
+// Handles white pawn quiet moves.
+function blackPawnQuietMove(origin: number, destination: number): void {
+  if (ranks[origin] === RANKS.RANK_2) {
+    quietMove(toMoveData(origin, destination, PIECES.EMPTY, PIECES.bQ, 0));
+    quietMove(toMoveData(origin, destination, PIECES.EMPTY, PIECES.bR, 0));
+    quietMove(toMoveData(origin, destination, PIECES.EMPTY, PIECES.bB, 0));
+    quietMove(toMoveData(origin, destination, PIECES.EMPTY, PIECES.bN, 0));
+  } else {
+    quietMove(toMoveData(origin, destination, PIECES.EMPTY, PIECES.EMPTY, 0));
+  }
+}
