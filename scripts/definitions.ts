@@ -373,3 +373,23 @@ function isSquareOffBoard(square: number): boolean {
   if (files[square] === SQUARES.OFFBOARD) return true;
   else return false;
 }
+
+// Hash the piece out or in.
+function hashPiece(piece: number, square: number): void {
+  chessBoard.boardState ^= pieceKeys[piece * 120 + square];
+}
+
+// Hash the castling key in or out
+function hashCastling(): void {
+  chessBoard.boardState ^= castlingKeys[chessBoard.castling];
+}
+
+// Hash the side permission in or out
+function hashSide(): void {
+  chessBoard.boardState ^= sideKey;
+}
+
+// Hash the en passant key in or out
+function hashEnPassant(): void {
+  chessBoard.boardState ^= pieceKeys[chessBoard.enPassant];
+}
