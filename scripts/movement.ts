@@ -59,13 +59,17 @@ function generateMoves(): void {
         !isSquareOffBoard(square + 9) &&
         pieceColour[chessBoard.pieces[square + 9]] === COLOURS.BLACK
       ) {
-        // Add pawn capture move.
+        whitePawnCaptureMove(square, square + 9, chessBoard.pieces[square + 9]);
       }
       if (
         !isSquareOffBoard(square + 11) &&
         pieceColour[chessBoard.pieces[square + 11]] === COLOURS.BLACK
       ) {
-        // Add pawn capture move.
+        whitePawnCaptureMove(
+          square,
+          square + 11,
+          chessBoard.pieces[square + 11]
+        );
       }
 
       // En Passant captures.
@@ -173,13 +177,17 @@ function generateMoves(): void {
         !isSquareOffBoard(square - 9) &&
         pieceColour[chessBoard.pieces[square - 9]] === COLOURS.WHITE
       ) {
-        // Add pawn capture move.
+        blackPawnCaptureMove(square, square - 9, chessBoard.pieces[square - 9]);
       }
       if (
         !isSquareOffBoard(square - 11) &&
         pieceColour[chessBoard.pieces[square - 11]] === COLOURS.WHITE
       ) {
-        // Add pawn capture move.
+        blackPawnCaptureMove(
+          square,
+          square - 11,
+          chessBoard.pieces[square - 11]
+        );
       }
 
       // En Passant captures.
