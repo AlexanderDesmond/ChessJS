@@ -2,7 +2,7 @@ function squareToString(square: number): string {
   return fileChar[files[square]] + rankChar[ranks[square]];
 }
 
-function printMove(move: number): void {
+function moveToString(move: number): void {
   let s;
 
   let fileOrigin = files[getOriginSquare(move)];
