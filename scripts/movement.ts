@@ -34,7 +34,7 @@ function generateMoves(): void {
 
       // If the square in front of the pawn is empty.
       if (chessBoard.pieces[square + 10] === PIECES.EMPTY) {
-        // Add pawn move.
+        whitePawnQuietMove(square, square + 10);
 
         // If the pawn is on the second rank and square two ranks in front is empty.
         if (
@@ -152,7 +152,7 @@ function generateMoves(): void {
 
       // If the square in front of the pawn is empty.
       if (chessBoard.pieces[square - 10] === PIECES.EMPTY) {
-        // Add pawn move.
+        blackPawnQuietMove(square, square - 10);
 
         // If the pawn is on the seventh rank and square two ranks in front is empty.
         if (
