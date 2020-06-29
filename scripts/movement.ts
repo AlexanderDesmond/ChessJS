@@ -359,3 +359,37 @@ function enPassantMove(move: number): void {
     chessBoard.moveListStart[chessBoard.plyCount + 1]++
   ] = 0;
 }
+
+// Handles white pawn capture moves.
+function whitePawnCaptureMove(
+  origin: number,
+  destination: number,
+  captured: number
+): void {
+  // If on the seventh rank, promote the pawn on next move forward.
+  if (ranks[origin] === RANKS.RANK_7) {
+    captureMove(toMoveData(origin, destination, captured, PIECES.wQ, 0));
+    captureMove(toMoveData(origin, destination, captured, PIECES.wR, 0));
+    captureMove(toMoveData(origin, destination, captured, PIECES.wB, 0));
+    captureMove(toMoveData(origin, destination, captured, PIECES.wN, 0));
+  } else {
+    captureMove(toMoveData(origin, destination, captured, PIECES.EMPTY, 0));
+  }
+}
+
+// Handles black pawn capture moves.
+function blackPawnCaptureMove(
+  origin: number,
+  destination: number,
+  captured: number
+): void {
+  // If on the seventh rank, promote the pawn on next move forward.
+  if (ranks[origin] === RANKS.RANK_2) {
+    captureMove(toMoveData(origin, destination, captured, PIECES.bQ, 0));
+    captureMove(toMoveData(origin, destination, captured, PIECES.bR, 0));
+    captureMove(toMoveData(origin, destination, captured, PIECES.bB, 0));
+    captureMove(toMoveData(origin, destination, captured, PIECES.bN, 0));
+  } else {
+    captureMove(toMoveData(origin, destination, captured, PIECES.EMPTY, 0));
+  }
+}
