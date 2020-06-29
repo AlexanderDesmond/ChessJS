@@ -260,3 +260,27 @@ function generateMoves(): void {
     piece = slidingPieces[index++];
   }
 }
+
+// Handle capture moves.
+function captureMove(move: number): void {
+  chessBoard.moveList[chessBoard.moveListStart[chessBoard.plyCount + 1]] = move;
+  chessBoard.moveScores[
+    chessBoard.moveListStart[chessBoard.plyCount + 1]++
+  ] = 0;
+}
+
+// Handles 'quiet' (non-threatening, non-checking, and non-capturing) moves.
+function quietMove(move: number): void {
+  chessBoard.moveList[chessBoard.moveListStart[chessBoard.plyCount + 1]] = move;
+  chessBoard.moveScores[
+    chessBoard.moveListStart[chessBoard.plyCount + 1]++
+  ] = 0;
+}
+
+// Handles En Passant moves.
+function enPassantMove(move: number): void {
+  chessBoard.moveList[chessBoard.moveListStart[chessBoard.plyCount + 1]] = move;
+  chessBoard.moveScores[
+    chessBoard.moveListStart[chessBoard.plyCount + 1]++
+  ] = 0;
+}
