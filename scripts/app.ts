@@ -3,7 +3,9 @@ init();
 parseFen(START_FEN);
 printBoard();
 
-generateMoves(); // for testing
+// For testing purposes.
+generateMoves();
+printMoveList();
 
 function init(): void {
   rankAndFilesInit();

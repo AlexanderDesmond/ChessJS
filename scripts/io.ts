@@ -16,7 +16,7 @@ function printMoveList(): void {
   }
 }
 
-function moveToString(move: number): void {
+function moveToString(move: number): string {
   let s;
 
   let fileOrigin = files[getOriginSquare(move)];
@@ -44,4 +44,6 @@ function moveToString(move: number): void {
 
     s += c;
   }
+
+  return s;
 }
