@@ -5,7 +5,7 @@ let chessBoard = <any>{};
 chessBoard.pieces = [];
 // Array for storing number of each piece in play.
 chessBoard.pieceNumber = [];
-//
+// Array for holding all actual Chess pieces.
 chessBoard.pieceList = [];
 // Side whose turn it is.
 chessBoard.side = COLOURS.WHITE;
