@@ -44,3 +44,29 @@ function addPiece(piece: number, square: number): void {
   ] = square;
   chessBoard.pieceNumber[piece]++;
 }
+
+// Move piece
+function movePiece(origin: number, destination: number): void {
+  // Get piece from its origin square.
+  let piece = chessBoard.pieces[origin];
+
+  // Hash piece out of its origin square.
+  hashPiece(piece, origin);
+
+  // Set the origin square to have no piece.
+  chessBoard.pieces[origin] = PIECES.EMPTY;
+
+  // Hash the piece in its destination square.
+  hashPiece(piece, destination);
+
+  // Set the destination square to hold the piece.
+  chessBoard.pieces[destination] = piece;
+
+  // Update pieceList array.
+  for (let i = 0; i < chessBoard.pieceNumber[piece]; i++) {
+    if (chessBoard.pieceList[getPieceIndex(piece, i)] === origin) {
+      chessBoard.pieceList[getPieceIndex(piece, i)] = destination;
+      break;
+    }
+  }
+}
