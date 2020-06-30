@@ -442,7 +442,7 @@ function checkBoard(): boolean {
   for (let pieceType = PIECES.wP; pieceType <= PIECES.bK; pieceType++) {
     for (
       let pieceNum = 0;
-      pieceNum < chessBoard.pieceList[pieceType];
+      pieceNum < chessBoard.pieceNumber[pieceType];
       pieceNum++
     ) {
       sq120 = chessBoard.pieceList[getPieceIndex(pieceType, pieceNum)];
@@ -489,5 +489,6 @@ function checkBoard(): boolean {
     return false;
   }
 
+  console.log("BOARD CHECKED: No Errors!");
   return true;
 }

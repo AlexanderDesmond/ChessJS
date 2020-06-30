@@ -6,6 +6,7 @@ printBoard();
 // For testing purposes.
 generateMoves();
 printMoveList();
+checkBoard();
 
 function init(): void {
   rankAndFilesInit();
