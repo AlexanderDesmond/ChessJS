@@ -12,6 +12,7 @@ function init(): void {
   rankAndFilesInit();
   boardStateInit();
   gridConversionInit();
+  boardVariablesInit();
 }
 
 function rankAndFilesInit(): void {
@@ -76,5 +77,18 @@ function gridConversionInit(): void {
       _120To64[sq] = sq64;
       sq64++;
     }
+  }
+}
+
+// Initialise board variables.
+function boardVariablesInit(): void {
+  for (let i = 0; i < MAX_GAME_MOVES; i++) {
+    chessBoard.history.push({
+      move: NO_MOVE,
+      castling: 0,
+      enPassant: 0,
+      fiftyMoveRule: 0,
+      boardState: 0,
+    });
   }
 }

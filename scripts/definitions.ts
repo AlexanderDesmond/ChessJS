@@ -70,11 +70,10 @@ const COLOURS = { WHITE: 0, BLACK: 1, BOTH: 2 };
 // Castling permissions
 const CASTLE_BIT = { WKCA: 1, WQCA: 2, BKCA: 4, BQCA: 8 };
 
-/*
+// Constants for move history
 const MAX_GAME_MOVES: number = 2048;
 const MAX_POSITION_MOVES: number = 256;
 const MAX_DEPTH: number = 64;
-*/
 
 // Arrays for files and ranks of board.
 const files: number[] = [];
