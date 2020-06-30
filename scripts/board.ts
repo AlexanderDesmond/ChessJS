@@ -17,6 +17,8 @@ chessBoard.fiftyMoveRule = 0;
 chessBoard.plyCount = 0;
 // Count of half-moves in the Search Tree - relevant to undoing and redoing moves
 chessBoard.plyHistory = 0;
+// Record of every move in the game.
+chessBoard.history = [];
 /* 
     Castling
     --------------------
