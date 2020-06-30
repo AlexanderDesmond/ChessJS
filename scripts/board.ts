@@ -431,3 +431,63 @@ function printBoard(): void {
   console.log("Castling: ", line);
   console.log("Key: ", chessBoard.boardState.toString(16));
 }
+
+function checkBoard(): boolean {
+  let tempPieceNumbers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  let tempMaterials = [0, 0];
+
+  let sq120, colour, pieceCount, tempPiece, tempPieceNum;
+
+  // Check pieces and pieceList
+  for (let pieceType = PIECES.wP; pieceType <= PIECES.bK; pieceType++) {
+    for (
+      let pieceNum = 0;
+      pieceNum < chessBoard.pieceList[pieceType];
+      pieceNum++
+    ) {
+      sq120 = chessBoard.pieceList[getPieceIndex(pieceType, pieceNum)];
+      if (chessBoard.pieces[sq120] !== pieceType) {
+        console.log("ERROR: Error in pieceList!");
+        return false;
+      }
+    }
+  }
+
+  // Check pieceNumber and material
+  for (let sq64 = 0; sq64 < 64; sq64++) {
+    sq120 = to120(sq64);
+    tempPiece = chessBoard.pieces[sq120];
+
+    tempPieceNumbers[tempPiece]++;
+    tempMaterials[pieceColour[tempPiece]] += pieceValue[tempPiece];
+  }
+  // Check pieceNumber
+  for (let pieceType = PIECES.wP; pieceType <= PIECES.bK; pieceType++) {
+    if (tempPieceNumbers[pieceType] !== chessBoard.pieceNumber[pieceType]) {
+      console.log("ERROR: Error with tempPieceNumbers!");
+      return false;
+    }
+  }
+  // Check material
+  if (
+    tempMaterials[COLOURS.WHITE] !== chessBoard.material[COLOURS.WHITE] ||
+    tempMaterials[COLOURS.BLACK] !== chessBoard.material[COLOURS.BLACK]
+  ) {
+    console.log("ERROR: Error with tempMaterials!");
+    return false;
+  }
+
+  // Check side
+  if (chessBoard.side !== COLOURS.WHITE && chessBoard.side !== COLOURS.BLACK) {
+    console.log("ERROR: Error with chessBoard.side!");
+    return false;
+  }
+
+  // Check boardState
+  if (generateBoardState() !== chessBoard.boardState) {
+    console.log("ERROR: Error with chessboard.boardState!");
+    return false;
+  }
+
+  return true;
+}
