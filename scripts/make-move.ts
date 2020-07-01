@@ -72,7 +72,7 @@ function movePiece(origin: number, destination: number): void {
 }
 
 // Make move
-function makeMove(move: number): void {
+function makeMove(move: number): boolean {
   // Get origin and destination squares and side to move.
   let origin = getOriginSquare(move);
   let destination = getDestinationSquare(move);
@@ -105,6 +105,7 @@ function makeMove(move: number): void {
         movePiece(SQUARES.H8, SQUARES.F8);
         break;
       default:
+        console.log("ERROR: Error with Castling!");
         break;
     }
   }
@@ -141,4 +142,48 @@ function makeMove(move: number): void {
   // Increment ply count and ply history.
   chessBoard.plyCount++;
   chessBoard.plyHistory++;
+
+  // Handle Pawn move.
+  if (isPawn[chessBoard.pieces[origin]]) {
+    chessBoard.fiftyMoveRule = 0;
+
+    // If it's an En Passant move.
+    if ((move & EP_FLAG) !== 0) {
+      if (side === COLOURS.WHITE) {
+        chessBoard.enPassant = origin + 10;
+      } else if (side === COLOURS.BLACK) {
+        chessBoard.enPassant = origin - 10;
+      }
+      hashEnPassant();
+    }
+  }
+
+  // Move the piece.
+  movePiece(origin, destination);
+
+  // Handle Pawn promotion
+  let promoted = getPromotedPiece(move);
+  if (promoted !== PIECES.EMPTY) {
+    clearPiece(destination);
+    addPiece(destination, promoted);
+  }
+
+  // After turn, switch the side.
+  chessBoard.side ^= 1;
+  hashSide();
+
+  // Ensure the move does not leave the King in check.
+  if (
+    isSquareUnderAttack(
+      chessBoard.piecesList[getPieceIndex(KINGS[side], 0)],
+      chessBoard.side
+    )
+  ) {
+    // reverseMove();
+
+    return false;
+  }
+
+  // If all is fine return true.
+  return true;
 }
