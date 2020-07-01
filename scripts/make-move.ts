@@ -179,7 +179,7 @@ function makeMove(move: number): boolean {
       chessBoard.side
     )
   ) {
-    // revertMove();
+    revertMove();
 
     return false;
   }
@@ -189,4 +189,24 @@ function makeMove(move: number): boolean {
 }
 
 // Revert move.
-function revertMove(): void {}
+function revertMove(): void {
+  // Decrement the ply count and ply history.
+  chessBoard.plyCount--;
+  chessBoard.plyHistory--;
+
+  // Get the move, and origin and destination squares
+  let move = chessBoard.history[chessBoard.plyHistory].move;
+  let origin = getOriginSquare(move);
+  let destination = getDestinationSquare(move);
+
+  // Hash out En Passant square.
+  if (chessBoard.enPassant !== SQUARES.NO_SQUARE) hashEnPassant();
+  // Hash out Castling permission.
+  hashCastling();
+
+  // Reset Castling permissions, En Passant squares, and the Fifty Move Rule.
+  chessBoard.castling = chessBoard.history[chessBoard.plyHistory].castling;
+  chessBoard.enPassant = chessBoard.history[chessBoard.plyHistory].enPassant;
+  chessBoard.fiftyMoveRule =
+    chessBoard.history[chessBoard.plyHistory].fiftyMoveRule;
+}
