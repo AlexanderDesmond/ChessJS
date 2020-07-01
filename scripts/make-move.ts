@@ -72,4 +72,40 @@ function movePiece(origin: number, destination: number): void {
 }
 
 // Make move
-function makeMove(move: number): void {}
+function makeMove(move: number): void {
+  // Get origin and destination squares and side to move.
+  let origin = getOriginSquare(move);
+  let destination = getDestinationSquare(move);
+  let side = chessBoard.side;
+
+  // Record the current board state in the history array.
+  chessBoard.history[chessBoard.plyHistory].boardState = chessBoard.boardState;
+
+  // Check if the move is an En Passant capture
+  if ((move & EP_FLAG) !== 0) {
+    if (side === COLOURS.WHITE) {
+      clearPiece(destination - 10);
+    } else if (side === COLOURS.BLACK) {
+      clearPiece(destination + 10);
+    }
+  }
+  // Check if the move is Castling
+  else if ((move & CASTLE_FLAG) !== 0) {
+    switch (destination) {
+      case SQUARES.C1:
+        movePiece(SQUARES.A1, SQUARES.D1);
+        break;
+      case SQUARES.C8:
+        movePiece(SQUARES.A8, SQUARES.D8);
+        break;
+      case SQUARES.G1:
+        movePiece(SQUARES.H1, SQUARES.F1);
+        break;
+      case SQUARES.G8:
+        movePiece(SQUARES.H8, SQUARES.F8);
+        break;
+      default:
+        break;
+    }
+  }
+}
