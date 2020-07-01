@@ -108,4 +108,37 @@ function makeMove(move: number): void {
         break;
     }
   }
+
+  // Hash out En Passant square.
+  if (chessBoard.enPassant !== SQUARES.NO_SQUARE) hashEnPassant();
+  // Hash out Castling permission.
+  hashCastling();
+
+  // Set up values for history.
+  chessBoard.history[chessBoard.plyHistory].move = move;
+  chessBoard.history[chessBoard.plyHistory].fiftyMoveRule =
+    chessBoard.fiftyMoveRule;
+  chessBoard.history[chessBoard.plyHistory].enPassant = chessBoard.enPassant;
+  chessBoard.history[chessBoard.plyHistory].castling = chessBoard.castling;
+
+  // Update Castling permissions.
+  chessBoard.castling &= CASTLING_PERMISSIONS[origin];
+  chessBoard.castling &= CASTLING_PERMISSIONS[destination];
+  chessBoard.enPassant = SQUARES.NO_SQUARE;
+  // Hash in castling permissions.
+  hashCastling();
+
+  // Get captured piece.
+  let captured = getCapturedPiece(move);
+  chessBoard.fiftyMoveRule++;
+
+  // If you captured a piece, remove it from the board.
+  if (captured !== PIECES.EMPTY) {
+    clearPiece(destination);
+    chessBoard.fiftyMoveRule = 0;
+  }
+
+  // Increment ply count and ply history.
+  chessBoard.plyCount++;
+  chessBoard.plyHistory++;
 }
