@@ -179,7 +179,7 @@ function makeMove(move: number): boolean {
       chessBoard.side
     )
   ) {
-    // reverseMove();
+    // revertMove();
 
     return false;
   }
@@ -187,3 +187,6 @@ function makeMove(move: number): boolean {
   // If all is fine return true.
   return true;
 }
+
+// Revert move.
+function revertMove(): void {}
