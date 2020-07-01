@@ -70,5 +70,3 @@ function movePiece(origin: number, destination: number): void {
     }
   }
 }
-
-function makeMove(move: number): void {}
