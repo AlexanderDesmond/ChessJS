@@ -175,7 +175,7 @@ function makeMove(move: number): boolean {
   // Ensure the move does not leave the King in check.
   if (
     isSquareUnderAttack(
-      chessBoard.piecesList[getPieceIndex(KINGS[side], 0)],
+      chessBoard.pieceList[getPieceIndex(KINGS[side], 0)],
       chessBoard.side
     )
   ) {

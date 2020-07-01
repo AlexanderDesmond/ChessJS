@@ -6,6 +6,10 @@ printBoard();
 // For testing purposes.
 generateMoves();
 printMoveList();
+printPieces();
+checkBoard();
+makeMove(chessBoard.moveList[0]);
+printBoard();
 checkBoard();
 
 function init(): void {
