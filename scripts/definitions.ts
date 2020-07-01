@@ -338,7 +338,7 @@ function getPieceIndex(piece: number, pieceNum: number): number {
 }
 
 const KINGS = [PIECES.wK, PIECES.bK];
-const CASTLES = [
+const CASTLING_PERMISSIONS = [
   15,
   15,
   15,
