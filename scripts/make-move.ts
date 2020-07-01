@@ -209,4 +209,62 @@ function revertMove(): void {
   chessBoard.enPassant = chessBoard.history[chessBoard.plyHistory].enPassant;
   chessBoard.fiftyMoveRule =
     chessBoard.history[chessBoard.plyHistory].fiftyMoveRule;
+
+  // Hash in En Passant square.
+  if (chessBoard.enPassant !== SQUARES.NO_SQUARE) hashEnPassant();
+  // Hash in Castling permission.
+  hashCastling();
+
+  // Switch sides.
+  chessBoard.side ^= 1;
+  hashSide();
+
+  // Revert En Passant capture.
+  if ((EP_FLAG & move) !== 0) {
+    if (chessBoard.side === COLOURS.WHITE) {
+      addPiece(destination - 10, PIECES.bP);
+    } else if (chessBoard.side === COLOURS.BLACK) {
+      addPiece(destination + 10, PIECES.wP);
+    }
+  }
+  // Revert Castling
+  else if (CASTLE_FLAG !== 0) {
+    switch (destination) {
+      case SQUARES.C1:
+        movePiece(SQUARES.D1, SQUARES.A1);
+        break;
+      case SQUARES.C8:
+        movePiece(SQUARES.D8, SQUARES.A8);
+        break;
+      case SQUARES.G1:
+        movePiece(SQUARES.F1, SQUARES.H1);
+        break;
+      case SQUARES.G8:
+        movePiece(SQUARES.F8, SQUARES.H8);
+        break;
+      default:
+        console.log("ERROR: Error reverting Castling!");
+        break;
+    }
+  }
+
+  // Revert move.
+  movePiece(destination, origin);
+
+  // Replace captured piece.
+  let captured = getCapturedPiece(move);
+  if (captured !== PIECES.EMPTY) {
+    addPiece(destination, captured);
+  }
+
+  // Revert promotion.
+  if (getPromotedPiece(move) !== PIECES.EMPTY) {
+    clearPiece(origin);
+    addPiece(
+      origin,
+      pieceColour[getPromotedPiece(move)] === COLOURS.WHITE
+        ? PIECES.wP
+        : PIECES.bP
+    );
+  }
 }
