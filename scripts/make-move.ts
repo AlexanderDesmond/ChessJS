@@ -70,3 +70,6 @@ function movePiece(origin: number, destination: number): void {
     }
   }
 }
+
+// Make move
+function makeMove(move: number): void {}
