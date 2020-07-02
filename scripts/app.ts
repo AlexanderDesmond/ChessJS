@@ -11,6 +11,9 @@ checkBoard();
 makeMove(chessBoard.moveList[0]);
 printBoard();
 checkBoard();
+revertMove();
+printBoard();
+checkBoard();
 
 function init(): void {
   rankAndFilesInit();
