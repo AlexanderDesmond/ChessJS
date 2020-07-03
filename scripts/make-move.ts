@@ -228,7 +228,7 @@ function revertMove(): void {
     }
   }
   // Revert Castling
-  else if (CASTLE_FLAG !== 0) {
+  else if ((CASTLE_FLAG & move) !== 0) {
     switch (destination) {
       case SQUARES.C1:
         movePiece(SQUARES.D1, SQUARES.A1);
