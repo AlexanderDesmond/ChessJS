@@ -3,4 +3,6 @@ function submitFen(): void {
   console.log(fenStr);
   parseFen(fenStr);
   printBoard();
+
+  startPerfTest(5);
 }

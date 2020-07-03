@@ -39,8 +39,11 @@ function startPerfTest(depth: number): void {
   console.log("Starting Test to Depth: ", depth);
   nodes = 0;
 
-  let move: number,
+  let move: number = 0,
     moveNum: number = 0;
+
+  // Generate moves.
+  generateMoves();
 
   // Loop through generated moves.
   for (
