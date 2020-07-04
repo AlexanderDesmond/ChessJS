@@ -78,6 +78,8 @@ function alphaBeta(alpha: number, beta: number, depth: number): number {
     i < chessBoard.moveListStart[chessBoard.plyCount + 1];
     i++
   ) {
+    // getNextBestMove();
+
     move = chessBoard.moveList[i];
 
     // If the move was illegal, skip to next iteration of loop.
