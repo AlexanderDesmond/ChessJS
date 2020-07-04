@@ -17,3 +17,26 @@ searchController.timeStopped;
 searchController.best;
 // If the engine is thinking or not.
 searchController.isThinking;
+
+// Get the best move for the current position.
+function searchPosition(): void {
+  let bestMove: number = NO_MOVE;
+  let bestScore: number = -Infinity;
+
+  // Iterative deepening depth-first search
+  for (
+    let currentDepth = 1;
+    currentDepth <= searchController.depth;
+    currentDepth++
+  ) {
+    // Alpha Beta search algorithm here
+
+    // If the time has run out, stop searching.
+    if (searchController.timeStopped) {
+      break;
+    }
+  }
+
+  searchController.best = bestMove;
+  searchController.isThinking = false;
+}
