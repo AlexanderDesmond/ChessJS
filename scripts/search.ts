@@ -55,7 +55,14 @@ function alphaBeta(alpha: number, beta: number, depth: number): number {
 
   searchController.nodes++;
 
-  // checkRepetition(); checkFiftyMoves();
+  // If the current position has already occurred,
+  // or if no Pawn moves or captures have occurred in the last fifty moves, return 0.
+  if (
+    (checkForRepetition() || chessBoard.fiftyMoveRule >= 100) &&
+    chessBoard.plyCount !== 0
+  ) {
+    return 0;
+  }
 
   // If the maximum depth has been reached, evaluate the current position.
   if (chessBoard.plyCount > MAX_DEPTH - 1) {
@@ -137,4 +144,21 @@ function checkTime(): void {
   if (Date.now() - searchController.startTime > searchController.time) {
     searchController.timeStopped = true;
   }
+}
+
+// Return true if the current position has occurred before, otherwise return false.
+function checkForRepetition(): boolean {
+  // Check for repetition after the most recent Pawn move or piece capture.
+  for (
+    let i = chessBoard.plyHistory - chessBoard.fiftyMoveRule;
+    i < chessBoard.plyHistory - 1;
+    i++
+  ) {
+    // If this position has already occurred.
+    if (chessBoard.boardState === chessBoard.history[i].boardState) {
+      return true;
+    }
+  }
+
+  return false;
 }
