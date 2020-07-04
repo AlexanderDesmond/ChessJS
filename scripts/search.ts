@@ -48,7 +48,10 @@ function alphaBeta(alpha: number, beta: number, depth: number): number {
     // return evaluate();
   }
 
-  // checkTime();
+  // After every 2048 nodes are searched, check if the time limit has elapsed.
+  if ((searchController.nodes & 2047) === 0) {
+    checkTime();
+  }
 
   searchController.nodes++;
 
@@ -127,4 +130,11 @@ function alphaBeta(alpha: number, beta: number, depth: number): number {
   }
 
   return alpha;
+}
+
+// Checks if the allocated time has elapsed.
+function checkTime(): void {
+  if (Date.now() - searchController.startTime > searchController.time) {
+    searchController.timeStopped = true;
+  }
 }
