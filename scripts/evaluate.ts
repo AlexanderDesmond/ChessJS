@@ -264,6 +264,9 @@ const rookTable = [
   0,
 ];
 
+// Bonus points for having both Bishops.
+const bishopPair = 40;
+
 // Evaluate the current position then return the score.
 function evaluatePosition(): number {
   // Score is the value of white pieces in play minus the value of black pieces in play.
@@ -340,6 +343,14 @@ function evaluatePosition(): number {
   for (let pieceNum = 0; pieceNum < chessBoard.pieceNumber[piece]; pieceNum++) {
     square = chessBoard.pieceList[getPieceIndex(piece, pieceNum)];
     score -= rookTable[getMirror64(to64(square))] / 2;
+  }
+
+  // Add bonus points for Bishop pairs.
+  if (chessBoard.pieceNumber[PIECES.wB] >= 2) {
+    score += bishopPair;
+  }
+  if (chessBoard.pieceNumber[PIECES.bB] >= 2) {
+    score -= bishopPair;
   }
 
   // Return the score for White or Black.
