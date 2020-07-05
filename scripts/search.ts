@@ -45,7 +45,7 @@ function searchPosition(): void {
 function alphaBeta(alpha: number, beta: number, depth: number): number {
   // If already at the lowest depth, evaluate the current position.
   if (depth <= 0) {
-    // return evaluate();
+    return evaluatePosition();
   }
 
   // After every 2048 nodes are searched, check if the time limit has elapsed.
@@ -66,7 +66,7 @@ function alphaBeta(alpha: number, beta: number, depth: number): number {
 
   // If the maximum depth has been reached, evaluate the current position.
   if (chessBoard.plyCount > MAX_DEPTH - 1) {
-    // return evaluate();
+    return evaluatePosition();
   }
 
   let score: number = -Infinity;
