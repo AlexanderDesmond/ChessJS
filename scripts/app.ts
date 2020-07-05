@@ -77,12 +77,21 @@ function gridConversionInit(): void {
 
 // Initialise board variables.
 function boardVariablesInit(): void {
+  // Initialise history
   for (let i = 0; i < MAX_GAME_MOVES; i++) {
     chessBoard.history.push({
       move: NO_MOVE,
       castling: 0,
       enPassant: 0,
       fiftyMoveRule: 0,
+      boardState: 0,
+    });
+  }
+
+  // Initialise PV table
+  for (let i = 0; i < PV_ENTRIES; i++) {
+    chessBoard.pvTable.push({
+      move: NO_MOVE,
       boardState: 0,
     });
   }
