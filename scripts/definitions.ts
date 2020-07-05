@@ -393,6 +393,11 @@ const MIRROR_64 = [
   7,
 ];
 
+// Return MIRROR_64
+function getMirror64(square: number): number {
+  return MIRROR_64[square];
+}
+
 // Return equivalent square from 64 square grid.
 function to64(index: number): number {
   return _120To64[index];
