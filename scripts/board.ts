@@ -39,6 +39,9 @@ chessBoard.moveList = []; // Length: 64 * 256
 chessBoard.moveScores = []; // Length: 64 * 256
 // Where the moveList will start
 chessBoard.moveListStart = []; // Length: 64
+// Array for Principal Variation table
+chessBoard.pvTable = [];
+chessBoard.pvArray = [];
 
 // Return piece index.
 /*

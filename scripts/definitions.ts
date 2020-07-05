@@ -77,6 +77,8 @@ const MAX_DEPTH: number = 64;
 
 // Checkmate score
 const CHECKMATE: number = 10000;
+// Size of Principal Variation table
+const PV_ENTRIES: number = 10000;
 
 // Arrays for files and ranks of board.
 const files: number[] = [];
