@@ -23,6 +23,8 @@ function searchPosition(): void {
   let bestMove: number = NO_MOVE;
   let bestScore: number = -Infinity;
 
+  clearForSearch();
+
   // Iterative deepening depth-first search
   for (
     let currentDepth = 1;
@@ -179,4 +181,32 @@ function checkForRepetition(): boolean {
   }
 
   return false;
+}
+
+// Clear in preparation for search.
+function clearForSearch(): void {
+  // Clear searchHistory array.
+  for (let i = 0; i < 14 * NUM_OF_SQUARES; i++) {
+    chessBoard.searchHistory[i] = 0;
+  }
+
+  // Clear searchKillers array.
+  for (let i = 0; i < 3 * MAX_DEPTH; i++) {
+    chessBoard.searchKillers[i] = 0;
+  }
+
+  // Clear PV Table
+  clearPVTable();
+
+  // Reset plyCount to 0.
+  chessBoard.plyCount = 0;
+
+  // Reset nodes, failHigh, and failHighFirst to 0.
+  searchController.nodes = 0;
+  searchController.failHigh = 0;
+  searchController.failHighFirst = 0;
+
+  // Reset time properties.
+  searchController.startTime = Date.now();
+  searchController.timeStopped = false;
 }
