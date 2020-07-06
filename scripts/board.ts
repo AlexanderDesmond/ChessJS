@@ -42,6 +42,9 @@ chessBoard.moveListStart = []; // Length: 64
 // Array for Principal Variation table
 chessBoard.pvTable = [];
 chessBoard.pvArray = [];
+// Arrays for searchHistory and searchKillers.
+chessBoard.searchHistory = [];
+chessBoard.searchKillers = [];
 
 // Return piece index.
 /*
