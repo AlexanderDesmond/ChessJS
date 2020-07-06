@@ -195,18 +195,23 @@ function clearForSearch(): void {
     chessBoard.searchKillers[i] = 0;
   }
 
-  // Clear PV Table
   clearPVTable();
 
   // Reset plyCount to 0.
   chessBoard.plyCount = 0;
-
   // Reset nodes, failHigh, and failHighFirst to 0.
   searchController.nodes = 0;
   searchController.failHigh = 0;
   searchController.failHighFirst = 0;
-
   // Reset time properties.
   searchController.startTime = Date.now();
   searchController.timeStopped = false;
+}
+
+// Clear PV Table.
+function clearPVTable(): void {
+  for (let i = 0; i < PV_ENTRIES; i++) {
+    chessBoard.pvTable[i].move = NO_MOVE;
+    chessBoard.pvTable[i].boardState = 0;
+  }
 }
