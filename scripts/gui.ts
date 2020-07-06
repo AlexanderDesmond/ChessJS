@@ -4,5 +4,6 @@ function submitFen(): void {
   parseFen(fenStr);
   printBoard();
 
-  startPerfTest(5);
+  searchPosition();
+  //startPerfTest(5);
 }

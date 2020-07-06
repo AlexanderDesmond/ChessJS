@@ -20,23 +20,37 @@ searchController.isThinking;
 
 // Get the best move for the current position.
 function searchPosition(): void {
-  let bestMove: number = NO_MOVE;
-  let bestScore: number = -Infinity;
+  let bestMove: number = NO_MOVE,
+    bestScore: number = -Infinity,
+    line: string = "";
 
   clearForSearch();
 
   // Iterative deepening depth-first search
   for (
     let currentDepth = 1;
-    currentDepth <= searchController.depth;
+    currentDepth <= /* searchController.depth */ 5;
     currentDepth++
   ) {
     // Alpha Beta search algorithm here
+    bestScore = alphaBeta(-Infinity, Infinity, currentDepth);
 
     // If the time has run out, stop searching.
     if (searchController.timeStopped) {
       break;
     }
+
+    bestMove = searchPVTable();
+    line =
+      "Depth: " +
+      currentDepth +
+      ", Best Move: " +
+      moveToString(bestMove) +
+      ", Score: " +
+      bestScore +
+      ", Nodes: " +
+      searchController.nodes;
+    console.log(line);
   }
 
   searchController.best = bestMove;
@@ -45,6 +59,8 @@ function searchPosition(): void {
 
 // Alpha Beta pruning algorithm
 function alphaBeta(alpha: number, beta: number, depth: number): number {
+  searchController.nodes++; // moved for now.
+
   // If already at the lowest depth, evaluate the current position.
   if (depth <= 0) {
     return evaluatePosition();
@@ -55,7 +71,7 @@ function alphaBeta(alpha: number, beta: number, depth: number): number {
     checkTime();
   }
 
-  searchController.nodes++;
+  //searchController.nodes++;
 
   // If the current position has already occurred,
   // or if no Pawn moves or captures have occurred in the last fifty moves, return 0.
