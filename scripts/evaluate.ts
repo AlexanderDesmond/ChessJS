@@ -335,14 +335,14 @@ function evaluatePosition(): number {
   piece = PIECES.wQ;
   for (let pieceNum = 0; pieceNum < chessBoard.pieceNumber[piece]; pieceNum++) {
     square = chessBoard.pieceList[getPieceIndex(piece, pieceNum)];
-    score += rookTable[to64(square)] / 2;
+    score += rookTable[to64(square)];
   }
 
   // Black Queen
   piece = PIECES.bQ;
   for (let pieceNum = 0; pieceNum < chessBoard.pieceNumber[piece]; pieceNum++) {
     square = chessBoard.pieceList[getPieceIndex(piece, pieceNum)];
-    score -= rookTable[getMirror64(to64(square))] / 2;
+    score -= rookTable[getMirror64(to64(square))];
   }
 
   // Add bonus points for Bishop pairs.
