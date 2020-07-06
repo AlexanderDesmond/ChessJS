@@ -69,6 +69,15 @@ function alphaBeta(alpha: number, beta: number, depth: number): number {
     return evaluatePosition();
   }
 
+  // If in check, look for a way to avoid checkmate.
+  let inCheck = isSquareUnderAttack(
+    chessBoard.pieceList[getPieceIndex(KINGS[chessBoard.side], 0)],
+    chessBoard.side
+  );
+  if (inCheck) {
+    depth++;
+  }
+
   let score: number = -Infinity;
 
   generateMoves();
@@ -130,10 +139,19 @@ function alphaBeta(alpha: number, beta: number, depth: number): number {
     }
   }
 
-  // checkCheckmate();
+  // If there are no legal moves available, it's either checkmate or stalemate.
+  if (legalMoveCount === 0) {
+    // If in check, return distance to checkmate from root node. Otherwise, return 0.
+    if (inCheck) {
+      return -CHECKMATE + chessBoard.plyCount;
+    } else {
+      return 0;
+    }
+  }
 
   if (alpha !== prevAlpha) {
-    // Store Principal Variation move
+    // Store best move in PV Table.
+    storePVMove(bestMove);
   }
 
   return alpha;
