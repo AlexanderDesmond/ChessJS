@@ -16,3 +16,28 @@ function storePVMove(move: number): void {
   chessBoard.pvTable[index].boardState = chessBoard.boardState;
   chessBoard.pvTable[index].move = move;
 }
+
+// Get line of moves from PV Table
+function getPVLine(depth: number): number {
+  let move: number = searchPVTable(),
+    count: number = 0;
+
+  while (move !== NO_MOVE && count < depth) {
+    if (moveExists(move)) {
+      // Make the move and add it to the pvArray.
+      makeMove(move);
+      chessBoard.pvArray[count++] = move;
+    } else {
+      break;
+    }
+    // Get the next move from the PV Table.
+    move = searchPVTable();
+  }
+
+  // Revert moves.
+  while (chessBoard.plyCount > 0) {
+    revertMove();
+  }
+
+  return count;
+}
