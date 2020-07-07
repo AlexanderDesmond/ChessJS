@@ -425,3 +425,35 @@ function blackPawnQuietMove(origin: number, destination: number): void {
     quietMove(toMoveData(origin, destination, PIECES.EMPTY, PIECES.EMPTY, 0));
   }
 }
+
+// Returns true if the given move exists, otherwise returns false.
+function moveExists(move: number): boolean {
+  // Generate all moves for the current position.
+  generateMoves();
+
+  let moveFound: number = NO_MOVE;
+
+  // Go through every move in the move list.
+  for (
+    let i = chessBoard.moveListStart[chessBoard.plyCount];
+    i < chessBoard.moveListStart[chessBoard.plyCount + 1];
+    i++
+  ) {
+    moveFound = chessBoard.moveList[i];
+
+    // If move is illegal, continue.
+    if (!makeMove(moveFound)) {
+      continue;
+    }
+
+    // Otherwise, revert the move.
+    revertMove();
+
+    // Check if the given and found moves match, if so return true.
+    if (move === moveFound) {
+      return true;
+    }
+  }
+
+  return false;
+}
