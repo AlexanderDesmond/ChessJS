@@ -216,7 +216,7 @@ function parseFen(fen: string) {
   // Set piece material
   updatePieces();
 
-  printSquareUnderAttack();
+  //printSquareUnderAttack();
 }
 
 // Update the material of the pieces.
@@ -253,7 +253,7 @@ function updatePieces(): void {
     }
   }
 
-  printPieces();
+  //printPieces();
 }
 
 function printPieces(): void {
