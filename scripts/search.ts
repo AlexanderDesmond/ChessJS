@@ -22,14 +22,15 @@ searchController.isThinking;
 function searchPosition(): void {
   let bestMove: number = NO_MOVE,
     bestScore: number = -Infinity,
-    line: string = "";
+    line: string = "",
+    pvNum: number = 0;
 
   clearForSearch();
 
   // Iterative deepening depth-first search
   for (
     let currentDepth = 1;
-    currentDepth <= /* searchController.depth */ 5;
+    currentDepth <= 5 /* searchController.depth */;
     currentDepth++
   ) {
     // Alpha Beta search algorithm here
@@ -50,6 +51,13 @@ function searchPosition(): void {
       bestScore +
       ", Nodes: " +
       searchController.nodes;
+
+    pvNum = getPVLine(currentDepth);
+    line += " PV: ";
+    for (let i = 0; i < pvNum; i++) {
+      line += " " + moveToString(chessBoard.pvArray[i]);
+    }
+
     console.log(line);
   }
 
@@ -59,7 +67,7 @@ function searchPosition(): void {
 
 // Alpha Beta pruning algorithm
 function alphaBeta(alpha: number, beta: number, depth: number): number {
-  searchController.nodes++; // moved for now.
+  searchController.nodes++; // moved for now
 
   // If already at the lowest depth, evaluate the current position.
   if (depth <= 0) {
@@ -88,47 +96,45 @@ function alphaBeta(alpha: number, beta: number, depth: number): number {
   }
 
   // If in check, look for a way to avoid checkmate.
-  let inCheck = isSquareUnderAttack(
+  let InCheck = isSquareUnderAttack(
     chessBoard.pieceList[getPieceIndex(KINGS[chessBoard.side], 0)],
-    chessBoard.side
+    chessBoard.side ^ 1
   );
-  if (inCheck) {
+  if (InCheck) {
     depth++;
   }
 
-  let score: number = -Infinity;
+  let score = -Infinity;
 
   generateMoves();
 
-  let moveNum: number = 0;
-  let legalMoveCount: number = 0;
-  let prevAlpha: number = alpha;
-  let bestMove: number = NO_MOVE;
-  let move: number = NO_MOVE;
+  let moveNum: number = 0,
+    legalMoveCount: number = 0,
+    prevAlpha: number = alpha,
+    bestMove: number = NO_MOVE,
+    move: number = NO_MOVE;
 
   // Get Principal Variation move
   // Order Principal Variation move
 
   // Loop through generated moves.
   for (
-    let i = chessBoard.moveListStart[chessBoard.plyCount];
-    i < chessBoard.moveListStart[chessBoard.plyCount + 1];
-    i++
+    moveNum = chessBoard.moveListStart[chessBoard.plyCount];
+    moveNum < chessBoard.moveListStart[chessBoard.plyCount + 1];
+    ++moveNum
   ) {
     // getNextBestMove();
 
-    move = chessBoard.moveList[i];
+    move = chessBoard.moveList[moveNum];
 
     // If the move was illegal, skip to next iteration of loop.
     if (!makeMove(move)) {
       continue;
     }
-
     // Increment legal move count.
     legalMoveCount++;
     // Set move score.
-    score = -alphaBeta(-alpha, -beta, depth - 1);
-
+    score = -alphaBeta(-beta, -alpha, depth - 1);
     // Revert move.
     revertMove();
 
@@ -141,7 +147,7 @@ function alphaBeta(alpha: number, beta: number, depth: number): number {
     if (score > alpha) {
       // Check for beta cut-off
       if (score >= beta) {
-        if (legalMoveCount === 1) {
+        if (legalMoveCount == 1) {
           searchController.failHighFirst++;
         }
         searchController.failHigh++;
@@ -149,7 +155,6 @@ function alphaBeta(alpha: number, beta: number, depth: number): number {
 
         return beta;
       }
-
       alpha = score;
       bestMove = move;
 
@@ -158,16 +163,16 @@ function alphaBeta(alpha: number, beta: number, depth: number): number {
   }
 
   // If there are no legal moves available, it's either checkmate or stalemate.
-  if (legalMoveCount === 0) {
+  if (legalMoveCount == 0) {
     // If in check, return distance to checkmate from root node. Otherwise, return 0.
-    if (inCheck) {
+    if (InCheck) {
       return -CHECKMATE + chessBoard.plyCount;
     } else {
       return 0;
     }
   }
 
-  if (alpha !== prevAlpha) {
+  if (alpha != prevAlpha) {
     // Store best move in PV Table.
     storePVMove(bestMove);
   }
