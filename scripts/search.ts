@@ -96,11 +96,11 @@ function alphaBeta(alpha: number, beta: number, depth: number): number {
   }
 
   // If in check, look for a way to avoid checkmate.
-  let InCheck = isSquareUnderAttack(
+  let inCheck = isSquareUnderAttack(
     chessBoard.pieceList[getPieceIndex(KINGS[chessBoard.side], 0)],
     chessBoard.side ^ 1
   );
-  if (InCheck) {
+  if (inCheck) {
     depth++;
   }
 
@@ -147,7 +147,7 @@ function alphaBeta(alpha: number, beta: number, depth: number): number {
     if (score > alpha) {
       // Check for beta cut-off
       if (score >= beta) {
-        if (legalMoveCount == 1) {
+        if (legalMoveCount === 1) {
           searchController.failHighFirst++;
         }
         searchController.failHigh++;
@@ -163,16 +163,16 @@ function alphaBeta(alpha: number, beta: number, depth: number): number {
   }
 
   // If there are no legal moves available, it's either checkmate or stalemate.
-  if (legalMoveCount == 0) {
+  if (legalMoveCount === 0) {
     // If in check, return distance to checkmate from root node. Otherwise, return 0.
-    if (InCheck) {
+    if (inCheck) {
       return -CHECKMATE + chessBoard.plyCount;
     } else {
       return 0;
     }
   }
 
-  if (alpha != prevAlpha) {
+  if (alpha !== prevAlpha) {
     // Store best move in PV Table.
     storePVMove(bestMove);
   }
