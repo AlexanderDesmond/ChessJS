@@ -53,7 +53,7 @@ function searchPosition(): void {
       searchController.nodes;
 
     pvNum = getPVLine(currentDepth);
-    line += " PV: ";
+    line += " PV:";
     for (let i = 0; i < pvNum; i++) {
       line += " " + moveToString(chessBoard.pvArray[i]);
     }
