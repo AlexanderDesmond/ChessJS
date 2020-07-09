@@ -16,8 +16,8 @@ function generateMoves(): void {
   chessBoard.moveListStart[chessBoard.plyCount + 1] =
     chessBoard.moveListStart[chessBoard.plyCount];
 
-  let pieceType, square;
-  let piece, sq, dir, index;
+  let pieceType: number, square: number;
+  let piece: number, sq: number, dir: number, index: number;
 
   // Pawn move generation.
   if (chessBoard.side === COLOURS.WHITE) {
@@ -99,7 +99,7 @@ function generateMoves(): void {
       ) {
         if (
           !isSquareUnderAttack(SQUARES.F1, COLOURS.BLACK) &&
-          isSquareUnderAttack(SQUARES.E1, COLOURS.BLACK)
+          !isSquareUnderAttack(SQUARES.E1, COLOURS.BLACK)
         ) {
           // Take quiet move.
           quietMove(
@@ -115,8 +115,8 @@ function generateMoves(): void {
       }
     }
     // Handle queenside castling.
-    if (chessBoard.castling & CASTLE_BIT.WQCA) {
-      // If F1 and G1 are empty.
+    if (chessBoard.castlePerm & CASTLE_BIT.WQCA) {
+      // If D1, C1, and B1 are empty.
       if (
         chessBoard.pieces[SQUARES.D1] === PIECES.EMPTY &&
         chessBoard.pieces[SQUARES.C1] === PIECES.EMPTY &&
@@ -124,7 +124,7 @@ function generateMoves(): void {
       ) {
         if (
           !isSquareUnderAttack(SQUARES.D1, COLOURS.BLACK) &&
-          isSquareUnderAttack(SQUARES.E1, COLOURS.BLACK)
+          !isSquareUnderAttack(SQUARES.E1, COLOURS.BLACK)
         ) {
           // Take quiet move.
           quietMove(
@@ -198,6 +198,7 @@ function generateMoves(): void {
             toMoveData(square, square - 9, PIECES.EMPTY, PIECES.EMPTY, EP_FLAG)
           );
         }
+
         if (square - 11 === chessBoard.enPassant) {
           // Take En Passant move.
           enPassantMove(
@@ -210,14 +211,14 @@ function generateMoves(): void {
     // Handle castling moves.
     // Handle kingside castling.
     if (chessBoard.castling & CASTLE_BIT.BKCA) {
-      // If F1 and G1 are empty.
+      // If F8 and G8 are empty.
       if (
         chessBoard.pieces[SQUARES.F8] === PIECES.EMPTY &&
         chessBoard.pieces[SQUARES.G8] === PIECES.EMPTY
       ) {
         if (
           !isSquareUnderAttack(SQUARES.F8, COLOURS.WHITE) &&
-          isSquareUnderAttack(SQUARES.E8, COLOURS.WHITE)
+          !isSquareUnderAttack(SQUARES.E8, COLOURS.WHITE)
         ) {
           // Take quiet move.
           quietMove(
@@ -234,7 +235,7 @@ function generateMoves(): void {
     }
     // Handle queenside castling.
     if (chessBoard.castling & CASTLE_BIT.BQCA) {
-      // If F1 and G1 are empty.
+      // If D8, C8, and B8 are empty.
       if (
         chessBoard.pieces[SQUARES.D8] === PIECES.EMPTY &&
         chessBoard.pieces[SQUARES.C8] === PIECES.EMPTY &&
@@ -242,7 +243,7 @@ function generateMoves(): void {
       ) {
         if (
           !isSquareUnderAttack(SQUARES.D8, COLOURS.WHITE) &&
-          isSquareUnderAttack(SQUARES.E8, COLOURS.WHITE)
+          !isSquareUnderAttack(SQUARES.E8, COLOURS.WHITE)
         ) {
           // Take quiet move.
           quietMove(
@@ -352,7 +353,7 @@ function captureMove(move: number): void {
   ] = 0;
 }
 
-// Handles 'quiet' (non-threatening, non-checking, and non-capturing) moves.
+// Handle 'quiet' (non-threatening, non-checking, and non-capturing) moves.
 function quietMove(move: number): void {
   chessBoard.moveList[chessBoard.moveListStart[chessBoard.plyCount + 1]] = move;
   chessBoard.moveScores[
@@ -360,7 +361,7 @@ function quietMove(move: number): void {
   ] = 0;
 }
 
-// Handles En Passant moves.
+// Handle En Passant moves.
 function enPassantMove(move: number): void {
   chessBoard.moveList[chessBoard.moveListStart[chessBoard.plyCount + 1]] = move;
   chessBoard.moveScores[
@@ -391,7 +392,7 @@ function blackPawnCaptureMove(
   destination: number,
   captured: number
 ): void {
-  // If on the seventh rank, promote the pawn on next move forward.
+  // If on the second rank, promote the pawn on next move forward.
   if (ranks[origin] === RANKS.RANK_2) {
     captureMove(toMoveData(origin, destination, captured, PIECES.bQ, 0));
     captureMove(toMoveData(origin, destination, captured, PIECES.bR, 0));
@@ -414,7 +415,7 @@ function whitePawnQuietMove(origin: number, destination: number): void {
   }
 }
 
-// Handles white pawn quiet moves.
+// Handles black pawn quiet moves.
 function blackPawnQuietMove(origin: number, destination: number): void {
   if (ranks[origin] === RANKS.RANK_2) {
     quietMove(toMoveData(origin, destination, PIECES.EMPTY, PIECES.bQ, 0));

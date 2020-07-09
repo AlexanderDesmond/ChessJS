@@ -27,7 +27,7 @@ function clearPiece(square: number): void {
 }
 
 // Add piece
-function addPiece(piece: number, square: number): void {
+function addPiece(square: number, piece: number): void {
   let colour = pieceColour[piece];
 
   // Hash the piece into the key.
@@ -85,7 +85,7 @@ function makeMove(move: number): boolean {
   if ((move & EP_FLAG) !== 0) {
     if (side === COLOURS.WHITE) {
       clearPiece(destination - 10);
-    } else if (side === COLOURS.BLACK) {
+    } else {
       clearPiece(destination + 10);
     }
   }
@@ -140,18 +140,17 @@ function makeMove(move: number): boolean {
   }
 
   // Increment ply count and ply history.
-  chessBoard.plyCount++;
   chessBoard.plyHistory++;
+  chessBoard.plyCount++;
 
   // Handle Pawn move.
   if (isPawn[chessBoard.pieces[origin]]) {
     chessBoard.fiftyMoveRule = 0;
-
     // If it's an En Passant move.
-    if ((move & EP_FLAG) !== 0) {
+    if ((move & START_FLAG) !== 0) {
       if (side === COLOURS.WHITE) {
         chessBoard.enPassant = origin + 10;
-      } else if (side === COLOURS.BLACK) {
+      } else {
         chessBoard.enPassant = origin - 10;
       }
       hashEnPassant();
@@ -191,8 +190,8 @@ function makeMove(move: number): boolean {
 // Revert move.
 function revertMove(): void {
   // Decrement the ply count and ply history.
-  chessBoard.plyCount--;
   chessBoard.plyHistory--;
+  chessBoard.plyCount--;
 
   // Get the move, and origin and destination squares
   let move = chessBoard.history[chessBoard.plyHistory].move;
@@ -206,9 +205,9 @@ function revertMove(): void {
 
   // Reset Castling permissions, En Passant squares, and the Fifty Move Rule.
   chessBoard.castling = chessBoard.history[chessBoard.plyHistory].castling;
-  chessBoard.enPassant = chessBoard.history[chessBoard.plyHistory].enPassant;
   chessBoard.fiftyMoveRule =
     chessBoard.history[chessBoard.plyHistory].fiftyMoveRule;
+  chessBoard.enPassant = chessBoard.history[chessBoard.plyHistory].enPassant;
 
   // Hash in En Passant square.
   if (chessBoard.enPassant !== SQUARES.NO_SQUARE) hashEnPassant();
@@ -223,7 +222,7 @@ function revertMove(): void {
   if ((EP_FLAG & move) !== 0) {
     if (chessBoard.side === COLOURS.WHITE) {
       addPiece(destination - 10, PIECES.bP);
-    } else if (chessBoard.side === COLOURS.BLACK) {
+    } else {
       addPiece(destination + 10, PIECES.wP);
     }
   }
