@@ -275,6 +275,40 @@ function quiescenceSearch(alpha: number, beta: number): number {
   return alpha;
 }
 
+// Find the best next move.
+function getNextBestMove(moveIndex: number): void {
+  let bestScore: number = -1,
+    bestIndex: number = moveIndex;
+
+  // Loop through all current possible moves from current move index.
+  for (
+    let i = moveIndex;
+    i < chessBoard.moveListStart[chessBoard.plyCount + 1];
+    i++
+  ) {
+    // If the score in moveScores is better than the bestScore
+    if (chessBoard.moveScores[i] > bestScore) {
+      // bestScore equals the score in moveScores.
+      bestScore = chessBoard.moveScores[i];
+      // bestIndex equals the current index.
+      bestIndex = i;
+    }
+  }
+
+  if (bestIndex !== moveIndex) {
+    // Swap scores at moveIndex and bestIndex indices in moveScores.
+    let temp: number = 0;
+    temp = chessBoard.moveScores[moveIndex];
+    chessBoard.moveScores[moveIndex] = chessBoard.moveScores[bestIndex];
+    chessBoard.moveScores[bestIndex] = temp;
+
+    // Swap scores at moveIndex and bestIndex indices in moveList.
+    temp = chessBoard.moveList[moveIndex];
+    chessBoard.moveList[moveIndex] = chessBoard.moveList[bestIndex];
+    chessBoard.moveList[bestIndex] = temp;
+  }
+}
+
 // Checks if the allocated time has elapsed.
 function checkTime(): void {
   if (Date.now() - searchController.startTime > searchController.time) {
