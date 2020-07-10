@@ -12,7 +12,7 @@ function toMoveData(
 }
 
 // Generate moves.
-function generateMoves(): void {
+function generateMoves(quiescence: boolean): void {
   chessBoard.moveListStart[chessBoard.plyCount + 1] =
     chessBoard.moveListStart[chessBoard.plyCount];
 
@@ -33,7 +33,7 @@ function generateMoves(): void {
       square = chessBoard.pieceList[getPieceIndex(pieceType, pieceNum)];
 
       // If the square in front of the pawn is empty.
-      if (chessBoard.pieces[square + 10] === PIECES.EMPTY) {
+      if (!quiescence && chessBoard.pieces[square + 10] === PIECES.EMPTY) {
         whitePawnQuietMove(square, square + 10);
 
         // If the pawn is on the second rank and square two ranks in front is empty.
@@ -90,52 +90,54 @@ function generateMoves(): void {
     }
 
     // Handle castling moves.
-    // Handle kingside castling.
-    if (chessBoard.castling & CASTLE_BIT.WKCA) {
-      // If F1 and G1 are empty.
-      if (
-        chessBoard.pieces[SQUARES.F1] === PIECES.EMPTY &&
-        chessBoard.pieces[SQUARES.G1] === PIECES.EMPTY
-      ) {
+    if (!quiescence) {
+      // Handle kingside castling.
+      if (chessBoard.castling & CASTLE_BIT.WKCA) {
+        // If F1 and G1 are empty.
         if (
-          !isSquareUnderAttack(SQUARES.F1, COLOURS.BLACK) &&
-          !isSquareUnderAttack(SQUARES.E1, COLOURS.BLACK)
+          chessBoard.pieces[SQUARES.F1] === PIECES.EMPTY &&
+          chessBoard.pieces[SQUARES.G1] === PIECES.EMPTY
         ) {
-          // Take quiet move.
-          quietMove(
-            toMoveData(
-              SQUARES.E1,
-              SQUARES.G1,
-              PIECES.EMPTY,
-              PIECES.EMPTY,
-              CASTLE_FLAG
-            )
-          );
+          if (
+            !isSquareUnderAttack(SQUARES.F1, COLOURS.BLACK) &&
+            !isSquareUnderAttack(SQUARES.E1, COLOURS.BLACK)
+          ) {
+            // Take quiet move.
+            quietMove(
+              toMoveData(
+                SQUARES.E1,
+                SQUARES.G1,
+                PIECES.EMPTY,
+                PIECES.EMPTY,
+                CASTLE_FLAG
+              )
+            );
+          }
         }
       }
-    }
-    // Handle queenside castling.
-    if (chessBoard.castlePerm & CASTLE_BIT.WQCA) {
-      // If D1, C1, and B1 are empty.
-      if (
-        chessBoard.pieces[SQUARES.D1] === PIECES.EMPTY &&
-        chessBoard.pieces[SQUARES.C1] === PIECES.EMPTY &&
-        chessBoard.pieces[SQUARES.B1] === PIECES.EMPTY
-      ) {
+      // Handle queenside castling.
+      if (chessBoard.castlePerm & CASTLE_BIT.WQCA) {
+        // If D1, C1, and B1 are empty.
         if (
-          !isSquareUnderAttack(SQUARES.D1, COLOURS.BLACK) &&
-          !isSquareUnderAttack(SQUARES.E1, COLOURS.BLACK)
+          chessBoard.pieces[SQUARES.D1] === PIECES.EMPTY &&
+          chessBoard.pieces[SQUARES.C1] === PIECES.EMPTY &&
+          chessBoard.pieces[SQUARES.B1] === PIECES.EMPTY
         ) {
-          // Take quiet move.
-          quietMove(
-            toMoveData(
-              SQUARES.E1,
-              SQUARES.C1,
-              PIECES.EMPTY,
-              PIECES.EMPTY,
-              CASTLE_FLAG
-            )
-          );
+          if (
+            !isSquareUnderAttack(SQUARES.D1, COLOURS.BLACK) &&
+            !isSquareUnderAttack(SQUARES.E1, COLOURS.BLACK)
+          ) {
+            // Take quiet move.
+            quietMove(
+              toMoveData(
+                SQUARES.E1,
+                SQUARES.C1,
+                PIECES.EMPTY,
+                PIECES.EMPTY,
+                CASTLE_FLAG
+              )
+            );
+          }
         }
       }
     }
@@ -151,7 +153,7 @@ function generateMoves(): void {
       square = chessBoard.pieceList[getPieceIndex(pieceType, pieceNum)];
 
       // If the square in front of the pawn is empty.
-      if (chessBoard.pieces[square - 10] === PIECES.EMPTY) {
+      if (!quiescence && chessBoard.pieces[square - 10] === PIECES.EMPTY) {
         blackPawnQuietMove(square, square - 10);
 
         // If the pawn is on the seventh rank and square two ranks in front is empty.
@@ -209,52 +211,54 @@ function generateMoves(): void {
     }
 
     // Handle castling moves.
-    // Handle kingside castling.
-    if (chessBoard.castling & CASTLE_BIT.BKCA) {
-      // If F8 and G8 are empty.
-      if (
-        chessBoard.pieces[SQUARES.F8] === PIECES.EMPTY &&
-        chessBoard.pieces[SQUARES.G8] === PIECES.EMPTY
-      ) {
+    if (!quiescence) {
+      // Handle kingside castling.
+      if (chessBoard.castling & CASTLE_BIT.BKCA) {
+        // If F8 and G8 are empty.
         if (
-          !isSquareUnderAttack(SQUARES.F8, COLOURS.WHITE) &&
-          !isSquareUnderAttack(SQUARES.E8, COLOURS.WHITE)
+          chessBoard.pieces[SQUARES.F8] === PIECES.EMPTY &&
+          chessBoard.pieces[SQUARES.G8] === PIECES.EMPTY
         ) {
-          // Take quiet move.
-          quietMove(
-            toMoveData(
-              SQUARES.E8,
-              SQUARES.G8,
-              PIECES.EMPTY,
-              PIECES.EMPTY,
-              CASTLE_FLAG
-            )
-          );
+          if (
+            !isSquareUnderAttack(SQUARES.F8, COLOURS.WHITE) &&
+            !isSquareUnderAttack(SQUARES.E8, COLOURS.WHITE)
+          ) {
+            // Take quiet move.
+            quietMove(
+              toMoveData(
+                SQUARES.E8,
+                SQUARES.G8,
+                PIECES.EMPTY,
+                PIECES.EMPTY,
+                CASTLE_FLAG
+              )
+            );
+          }
         }
       }
-    }
-    // Handle queenside castling.
-    if (chessBoard.castling & CASTLE_BIT.BQCA) {
-      // If D8, C8, and B8 are empty.
-      if (
-        chessBoard.pieces[SQUARES.D8] === PIECES.EMPTY &&
-        chessBoard.pieces[SQUARES.C8] === PIECES.EMPTY &&
-        chessBoard.pieces[SQUARES.B8] === PIECES.EMPTY
-      ) {
+      // Handle queenside castling.
+      if (chessBoard.castling & CASTLE_BIT.BQCA) {
+        // If D8, C8, and B8 are empty.
         if (
-          !isSquareUnderAttack(SQUARES.D8, COLOURS.WHITE) &&
-          !isSquareUnderAttack(SQUARES.E8, COLOURS.WHITE)
+          chessBoard.pieces[SQUARES.D8] === PIECES.EMPTY &&
+          chessBoard.pieces[SQUARES.C8] === PIECES.EMPTY &&
+          chessBoard.pieces[SQUARES.B8] === PIECES.EMPTY
         ) {
-          // Take quiet move.
-          quietMove(
-            toMoveData(
-              SQUARES.E8,
-              SQUARES.C8,
-              PIECES.EMPTY,
-              PIECES.EMPTY,
-              CASTLE_FLAG
-            )
-          );
+          if (
+            !isSquareUnderAttack(SQUARES.D8, COLOURS.WHITE) &&
+            !isSquareUnderAttack(SQUARES.E8, COLOURS.WHITE)
+          ) {
+            // Take quiet move.
+            quietMove(
+              toMoveData(
+                SQUARES.E8,
+                SQUARES.C8,
+                PIECES.EMPTY,
+                PIECES.EMPTY,
+                CASTLE_FLAG
+              )
+            );
+          }
         }
       }
     }
@@ -293,7 +297,8 @@ function generateMoves(): void {
           }
         } else {
           // Take quiet move.
-          quietMove(toMoveData(square, sq, PIECES.EMPTY, PIECES.EMPTY, 0));
+          if (!quiescence)
+            quietMove(toMoveData(square, sq, PIECES.EMPTY, PIECES.EMPTY, 0));
         }
       }
     }
@@ -333,7 +338,8 @@ function generateMoves(): void {
             break;
           }
           // Take quiet move.
-          quietMove(toMoveData(square, sq, PIECES.EMPTY, PIECES.EMPTY, 0));
+          if (!quiescence)
+            quietMove(toMoveData(square, sq, PIECES.EMPTY, PIECES.EMPTY, 0));
 
           sq += dir;
         }
@@ -430,7 +436,7 @@ function blackPawnQuietMove(origin: number, destination: number): void {
 // Returns true if the given move exists, otherwise returns false.
 function moveExists(move: number): boolean {
   // Generate all moves for the current position.
-  generateMoves();
+  generateMoves(false);
 
   let moveFound: number = NO_MOVE;
 

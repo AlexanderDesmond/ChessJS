@@ -104,7 +104,7 @@ function alphaBeta(alpha: number, beta: number, depth: number): number {
 
   let score = -Infinity;
 
-  generateMoves();
+  generateMoves(false);
 
   let moveNum: number = 0,
     legalMoveCount: number = 0,
@@ -214,7 +214,7 @@ function quiescenceSearch(alpha: number, beta: number): number {
     alpha = score;
   }
 
-  generateMoves(); // need to change this and the function
+  generateMoves(true); // need to change this and the function
 
   let moveNum: number = 0,
     legalMoveCount: number = 0,
