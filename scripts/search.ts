@@ -67,8 +67,6 @@ function searchPosition(): void {
 
 // Alpha Beta pruning algorithm
 function alphaBeta(alpha: number, beta: number, depth: number): number {
-  searchController.nodes++; // moved for now
-
   // If already at the lowest depth, evaluate the current position.
   if (depth <= 0) {
     return evaluatePosition();
@@ -79,7 +77,7 @@ function alphaBeta(alpha: number, beta: number, depth: number): number {
     checkTime();
   }
 
-  //searchController.nodes++;
+  searchController.nodes++;
 
   // If the current position has already occurred,
   // or if no Pawn moves or captures have occurred in the last fifty moves, return 0.
@@ -169,6 +167,103 @@ function alphaBeta(alpha: number, beta: number, depth: number): number {
       return -CHECKMATE + chessBoard.plyCount;
     } else {
       return 0;
+    }
+  }
+
+  if (alpha !== prevAlpha) {
+    // Store best move in PV Table.
+    storePVMove(bestMove);
+  }
+
+  return alpha;
+}
+
+// Quiescence search algorithm - Extends search to find stable quiet positions.
+function quiescenceSearch(alpha: number, beta: number): number {
+  // After every 2048 nodes are searched, check if the time limit has elapsed.
+  if ((searchController.nodes & 2047) === 0) {
+    checkTime();
+  }
+
+  searchController.nodes++;
+
+  // If the current position has already occurred,
+  // or if no Pawn moves or captures have occurred in the last fifty moves, return 0.
+  if (
+    (checkForRepetition() || chessBoard.fiftyMoveRule >= 100) &&
+    chessBoard.plyCount !== 0
+  ) {
+    return 0;
+  }
+
+  // If the maximum depth has been reached, evaluate the current position.
+  if (chessBoard.plyCount > MAX_DEPTH - 1) {
+    return evaluatePosition();
+  }
+
+  // Get score for current position.
+  let score = evaluatePosition();
+
+  // If the score is still better than beta, beta can be safely returned.
+  if (score >= beta) {
+    return beta;
+  }
+
+  // If the score is greater than alpha, increase alpha to score.
+  if (score > alpha) {
+    alpha = score;
+  }
+
+  generateMoves(); // need to change this and the function
+
+  let moveNum: number = 0,
+    legalMoveCount: number = 0,
+    prevAlpha: number = alpha,
+    bestMove: number = NO_MOVE,
+    move: number = NO_MOVE;
+
+  // Get Principal Variation move
+  // Order Principal Variation move
+
+  // Loop through generated moves.
+  for (
+    moveNum = chessBoard.moveListStart[chessBoard.plyCount];
+    moveNum < chessBoard.moveListStart[chessBoard.plyCount + 1];
+    ++moveNum
+  ) {
+    // getNextBestMove();
+
+    move = chessBoard.moveList[moveNum];
+
+    // If the move was illegal, skip to next iteration of loop.
+    if (!makeMove(move)) {
+      continue;
+    }
+    // Increment legal move count.
+    legalMoveCount++;
+    // Set move score.
+    score = -quiescenceSearch(-beta, -alpha);
+    // Revert move.
+    revertMove();
+
+    // If search time has run out, return 0.
+    if (searchController.timeStopped) {
+      return 0;
+    }
+
+    // Check if alpha has been improved.
+    if (score > alpha) {
+      // Check for beta cut-off
+      if (score >= beta) {
+        if (legalMoveCount === 1) {
+          searchController.failHighFirst++;
+        }
+        searchController.failHigh++;
+
+        return beta;
+      }
+      alpha = score;
+      bestMove = move;
     }
   }
 
