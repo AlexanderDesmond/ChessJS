@@ -67,9 +67,9 @@ function searchPosition(): void {
 
 // Alpha Beta pruning algorithm
 function alphaBeta(alpha: number, beta: number, depth: number): number {
-  // If already at the lowest depth, evaluate the current position.
+  // If already at the lowest depth, evaluate the current position with quiescence search.
   if (depth <= 0) {
-    return evaluatePosition();
+    return quiescenceSearch(alpha, beta);
   }
 
   // After every 2048 nodes are searched, check if the time limit has elapsed.
@@ -178,7 +178,7 @@ function alphaBeta(alpha: number, beta: number, depth: number): number {
   return alpha;
 }
 
-// Quiescence search algorithm - Extends search to find stable quiet positions.
+// Quiescence search algorithm - Extends search in volatile positions (when captures can occur) to find quiet positions.
 function quiescenceSearch(alpha: number, beta: number): number {
   // After every 2048 nodes are searched, check if the time limit has elapsed.
   if ((searchController.nodes & 2047) === 0) {
