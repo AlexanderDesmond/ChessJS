@@ -9,7 +9,7 @@ function perfTest(depth: number): void {
   }
 
   // Generate Moves
-  generateMoves();
+  generateMoves(true);
   let move;
 
   // Loop through generated moves.
@@ -43,7 +43,7 @@ function startPerfTest(depth: number): void {
     moveNum: number = 0;
 
   // Generate moves.
-  generateMoves();
+  generateMoves(true);
 
   // Loop through generated moves.
   for (
