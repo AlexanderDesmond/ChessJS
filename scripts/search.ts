@@ -121,7 +121,8 @@ function alphaBeta(alpha: number, beta: number, depth: number): number {
     moveNum < chessBoard.moveListStart[chessBoard.plyCount + 1];
     ++moveNum
   ) {
-    // getNextBestMove();
+    // Get the next best move.
+    getNextBestMove(moveNum);
 
     move = chessBoard.moveList[moveNum];
 
@@ -231,7 +232,8 @@ function quiescenceSearch(alpha: number, beta: number): number {
     moveNum < chessBoard.moveListStart[chessBoard.plyCount + 1];
     ++moveNum
   ) {
-    // getNextBestMove();
+    // Get the next best move.
+    getNextBestMove(moveNum);
 
     move = chessBoard.moveList[moveNum];
 
