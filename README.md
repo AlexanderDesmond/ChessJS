@@ -8,7 +8,7 @@ This project is mainly just to practice using some algorithms and concepts.
 
 **Things I've used in this project:**
 
-- [Minimax algorithm](https://en.wikipedia.org/wiki/Minimax) with [Alpha-Beta pruning](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning)
+- [Minimax algorithm](https://en.wikipedia.org/wiki/Minimax) with [Alpha-Beta pruning](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning) and [Quiescence search](https://en.wikipedia.org/wiki/Quiescence_search)
 - [Binary search tree](https://en.wikipedia.org/wiki/Binary_search_tree)
 - [Iterative deepening](https://en.wikipedia.org/wiki/Iterative_deepening_depth-first_search) [depth-first search](https://en.wikipedia.org/wiki/Depth-first_search)
 - [Bitwise operations](https://en.wikipedia.org/wiki/Bitwise_operation)
