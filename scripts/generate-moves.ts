@@ -1,3 +1,22 @@
+// Value of pieces
+const pieceValues: number[] = [
+  0,
+  100,
+  200,
+  300,
+  400,
+  500,
+  600,
+  100,
+  200,
+  300,
+  400,
+  500,
+  600,
+];
+// Scores for every combination of MVV (Most Valuable Victim) and LVA (Least Valuable Attacker)
+const mvvLvaScores: number[] = [];
+
 // Generate move data.
 function toMoveData(
   origin: number,
