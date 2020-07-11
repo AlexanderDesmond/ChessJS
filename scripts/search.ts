@@ -30,7 +30,7 @@ function searchPosition(): void {
   // Iterative deepening depth-first search
   for (
     let currentDepth = 1;
-    currentDepth <= 5 /* searchController.depth */;
+    currentDepth <= 6 /* searchController.depth */;
     currentDepth++
   ) {
     // Alpha Beta search algorithm here
@@ -159,7 +159,15 @@ function alphaBeta(alpha: number, beta: number, depth: number): number {
           searchController.failHighFirst++;
         }
         searchController.failHigh++;
-        // updateKillerMoves();
+
+        // If the move was not a capture.
+        if ((move & CAPTURED_FLAG) === 0) {
+          // First killer move assigned as second killer move.
+          chessBoard.searchKillers[MAX_DEPTH + chessBoard.plyCount] =
+            chessBoard.searchKillers[chessBoard.plyCount];
+          // First move is now the latest non-capturing move which is better than beta.
+          chessBoard.searchKillers[chessBoard.plyCount] = move;
+        }
 
         return beta;
       }
@@ -270,15 +278,6 @@ function quiescenceSearch(alpha: number, beta: number): number {
           searchController.failHighFirst++;
         }
         searchController.failHigh++;
-
-        // If the move was not a capture.
-        if ((move & CAPTURED_FLAG) === 0) {
-          // First killer move assigned as second killer move.
-          chessBoard.searchKillers[MAX_DEPTH + chessBoard.plyCount] =
-            chessBoard.searchKillers[chessBoard.plyCount];
-          // First move is now the latest non-capturing move which is better than beta.
-          chessBoard.searchKillers[chessBoard.plyCount] = move;
-        }
 
         return beta;
       }
