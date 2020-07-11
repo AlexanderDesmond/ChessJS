@@ -392,9 +392,24 @@ function captureMove(move: number): void {
 // Handle 'quiet' (non-threatening, non-checking, and non-capturing) moves.
 function quietMove(move: number): void {
   chessBoard.moveList[chessBoard.moveListStart[chessBoard.plyCount + 1]] = move;
-  chessBoard.moveScores[
-    chessBoard.moveListStart[chessBoard.plyCount + 1]++
-  ] = 0;
+  chessBoard.moveScores[chessBoard.moveListStart[chessBoard.plyCount + 1]] = 0;
+
+  // If the given move is the same as the first killer move.
+  if (move === chessBoard.searchKillers[chessBoard.plyCount]) {
+    // First killer
+    chessBoard.moveScores[
+      chessBoard.moveListStart[chessBoard.plyCount + 1]
+    ] = 900000;
+  } else if (
+    move === chessBoard.searchKillers[chessBoard.plyCount + MAX_DEPTH]
+  ) {
+    // Second killer
+    chessBoard.moveScores[
+      chessBoard.moveListStart[chessBoard.plyCount + 1]
+    ] = 800000;
+  }
+
+  chessBoard.moveListStart[chessBoard.plyCount + 1]++;
 }
 
 // Handle En Passant moves.
