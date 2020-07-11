@@ -17,6 +17,16 @@ const pieceValues: number[] = [
 // Scores for every combination of MVV (Most Valuable Victim) and LVA (Least Valuable Attacker)
 const mvvLvaScores: number[] = [];
 
+// Initialise for MVV and LVA
+function mvvLvaInit(): void {
+  for (let attacker = PIECES.wP; attacker <= PIECES.bK; attacker++) {
+    for (let victim = PIECES.wP; victim <= PIECES.bK; victim++) {
+      mvvLvaScores[victim * 14 + attacker] =
+        pieceValues[victim] + 6 - pieceValues[attacker] / 100;
+    }
+  }
+}
+
 // Generate move data.
 function toMoveData(
   origin: number,
