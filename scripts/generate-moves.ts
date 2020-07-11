@@ -407,6 +407,12 @@ function quietMove(move: number): void {
     chessBoard.moveScores[
       chessBoard.moveListStart[chessBoard.plyCount + 1]
     ] = 800000;
+  } else {
+    chessBoard.moveScores[chessBoard.moveListStart[chessBoard.plyCount + 1]] =
+      chessBoard.searchHistory[
+        chessBoard.pieces[getOriginSquare(move)] * NUM_OF_SQUARES +
+          getDestinationSquare(move)
+      ];
   }
 
   chessBoard.moveListStart[chessBoard.plyCount + 1]++;
