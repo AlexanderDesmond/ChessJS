@@ -30,7 +30,7 @@ function searchPosition(): void {
   // Iterative deepening depth-first search
   for (
     let currentDepth = 1;
-    currentDepth <= 5 /* searchController.depth */;
+    currentDepth <= 3 /* searchController.depth */;
     currentDepth++
   ) {
     // Alpha Beta search algorithm here
@@ -56,6 +56,15 @@ function searchPosition(): void {
     line += " PV:";
     for (let i = 0; i < pvNum; i++) {
       line += " " + moveToString(chessBoard.pvArray[i]);
+    }
+    if (currentDepth !== 1) {
+      line +=
+        "Ordering: " +
+        (
+          (searchController.failHighFirst / searchController.failHigh) *
+          100
+        ).toFixed(2) +
+        "%";
     }
 
     console.log(line);
