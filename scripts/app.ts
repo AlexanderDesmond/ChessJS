@@ -8,6 +8,7 @@ function init(): void {
   boardStateInit();
   gridConversionInit();
   boardVariablesInit();
+  mvvLvaInit();
 }
 
 function rankAndFilesInit(): void {
