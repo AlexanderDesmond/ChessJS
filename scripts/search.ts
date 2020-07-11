@@ -137,9 +137,6 @@ function alphaBeta(alpha: number, beta: number, depth: number): number {
     }
   }
 
-  // Get Principal Variation move
-  // Order Principal Variation move
-
   // Loop through generated moves.
   for (
     moveNum = chessBoard.moveListStart[chessBoard.plyCount];
@@ -264,9 +261,6 @@ function quiescenceSearch(alpha: number, beta: number): number {
     prevAlpha: number = alpha,
     bestMove: number = NO_MOVE,
     move: number = NO_MOVE;
-
-  // Get Principal Variation move
-  // Order Principal Variation move
 
   // Loop through generated moves.
   for (
