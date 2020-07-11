@@ -171,6 +171,15 @@ function alphaBeta(alpha: number, beta: number, depth: number): number {
 
         return beta;
       }
+
+      // If the move was not a capture.
+      if ((move & CAPTURED_FLAG) === 0) {
+        chessBoard.searchHistory[
+          chessBoard.pieces[getOriginSquare(move)] * NUM_OF_SQUARES +
+            getDestinationSquare(move)
+        ] += depth * depth;
+      }
+
       alpha = score;
       bestMove = move;
 
