@@ -383,9 +383,10 @@ function generateMoves(quiescence: boolean): void {
 // Handle capture moves.
 function captureMove(move: number): void {
   chessBoard.moveList[chessBoard.moveListStart[chessBoard.plyCount + 1]] = move;
-  chessBoard.moveScores[
-    chessBoard.moveListStart[chessBoard.plyCount + 1]++
-  ] = 0;
+  chessBoard.moveScores[chessBoard.moveListStart[chessBoard.plyCount + 1]++] =
+    mvvLvaScores[
+      getCapturedPiece(move) * 14 + chessBoard.pieces[getOriginSquare(move)]
+    ] + 1000000;
 }
 
 // Handle 'quiet' (non-threatening, non-checking, and non-capturing) moves.
@@ -399,9 +400,8 @@ function quietMove(move: number): void {
 // Handle En Passant moves.
 function enPassantMove(move: number): void {
   chessBoard.moveList[chessBoard.moveListStart[chessBoard.plyCount + 1]] = move;
-  chessBoard.moveScores[
-    chessBoard.moveListStart[chessBoard.plyCount + 1]++
-  ] = 0;
+  chessBoard.moveScores[chessBoard.moveListStart[chessBoard.plyCount + 1]++] =
+    105 + 1000000;
 }
 
 // Handles white pawn capture moves.
