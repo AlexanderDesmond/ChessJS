@@ -121,6 +121,22 @@ function alphaBeta(alpha: number, beta: number, depth: number): number {
     bestMove: number = NO_MOVE,
     move: number = NO_MOVE;
 
+  // Search PV Table
+  let pvMove: number = searchPVTable();
+  // Prioritise best line from previous search.
+  if (pvMove !== NO_MOVE) {
+    for (
+      moveNum = chessBoard.moveListStart[chessBoard.plyCount];
+      moveNum < chessBoard.moveListStart[chessBoard.plyCount + 1];
+      ++moveNum
+    ) {
+      if (chessBoard.moveList[moveNum] === pvMove) {
+        chessBoard.moveScores[moveNum] = 2000000;
+        break;
+      }
+    }
+  }
+
   // Get Principal Variation move
   // Order Principal Variation move
 
