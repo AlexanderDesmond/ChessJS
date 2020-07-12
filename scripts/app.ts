@@ -1,7 +1,6 @@
 init();
 
-parseFen(START_FEN);
-printBoard();
+newGame(START_FEN);
 
 function init(): void {
   rankAndFilesInit();

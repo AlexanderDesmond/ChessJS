@@ -32,8 +32,8 @@ function setupPieces(): void {
     // For every piece.
     if (piece >= PIECES.wP && piece <= PIECES.bK) {
       // Set up file and rank names.
-      let fileName: string = "file" + (file + 1);
-      let rankName: string = "rank" + (rank + 1);
+      let fileName: string = "file" + "-" + (file + 1);
+      let rankName: string = "rank" + "-" + (rank + 1);
 
       // Set up piece file name
       let pieceFileName: string =
