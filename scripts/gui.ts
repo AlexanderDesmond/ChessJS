@@ -1,11 +1,6 @@
 function submitFen(): void {
-  let fenStr = (<HTMLInputElement>document.getElementById("fen-text")).value;
-  console.log(fenStr);
-  parseFen(fenStr);
-  printBoard();
-
-  searchPosition();
-  //startPerfTest(5);
+  let fen = (<HTMLInputElement>document.getElementById("fen-text")).value;
+  newGame(fen);
 }
 
 // Clear all pieces from board.
@@ -19,6 +14,9 @@ function clearPieces(): void {
 // Set board pieces.
 function setupPieces(): void {
   let sq120: number, piece: number, file: number, rank: number;
+
+  // Clear all pieces.
+  clearPieces();
 
   // Loop through board squares.
   for (let sq = 0; sq < 64; sq++) {
@@ -54,4 +52,12 @@ function setupPieces(): void {
       document.getElementsByClassName("board")[0].appendChild(node);
     }
   }
+}
+
+function newGame(fen: string): void {
+  // Parse FEN
+  parseFen(fen);
+  printBoard();
+
+  setupPieces();
 }
