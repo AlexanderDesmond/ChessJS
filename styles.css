@@ -30,9 +30,14 @@
   flex-direction: column;
 }
 
+.time-limit {
+  margin-bottom: 1rem;
+}
+
 .engine-output {
   display: flex;
   flex-direction: column;
+  margin-bottom: 1rem;
 }
 
 .engine-input {
@@ -42,4 +47,8 @@
 
 .engine-input > button {
   width: 100px;
+}
+
+#undo-btn {
+  margin-top: 0.5rem;
 }
