@@ -9,6 +9,7 @@ function init(): void {
   gridConversionInit();
   boardVariablesInit();
   mvvLvaInit();
+  boardSquaresInit();
 }
 
 function rankAndFilesInit(): void {
@@ -95,5 +96,37 @@ function boardVariablesInit(): void {
       move: NO_MOVE,
       boardState: 0,
     });
+  }
+}
+
+// Initialise board squares.
+function boardSquaresInit(): void {
+  let isLight: boolean = false;
+  let rankName: string, fileName: string, lightStr: string;
+
+  for (let rank = RANKS.RANK_8; rank >= RANKS.RANK_1; rank--) {
+    // Flip isLight value
+    isLight = !isLight;
+
+    // Set up rankName
+    rankName = "rank" + "-" + (rank + 1);
+    for (let file = FILES.FILE_A; file <= FILES.FILE_H; file++) {
+      // Set up fileName
+      fileName = "file" + "-" + (file + 1);
+
+      // Set lightString value
+      if (isLight) lightStr = "light";
+      else lightStr = "dark";
+
+      // Flip isLight value
+      isLight = !isLight;
+
+      // Create new div node.
+      let node = document.createElement("div");
+      // Add classes to new div node.
+      node.classList.add("square", rankName, fileName, lightStr);
+      // Add new div node to board div.
+      document.getElementsByClassName("board")[0].appendChild(node);
+    }
   }
 }
