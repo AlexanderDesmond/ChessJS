@@ -5,3 +5,24 @@
 #fen-text {
   width: 24rem;
 }
+
+.board-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.board {
+  position: relative;
+  top: 1rem;
+  left: 1rem;
+
+  width: 480px;
+  height: 480px;
+  border: 2px solid black;
+}
+
+.board-io {
+  position: relative;
+  margin-top: 1rem;
+  margin-left: 2rem;
+}
