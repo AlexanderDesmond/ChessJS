@@ -55,6 +55,7 @@
   margin-top: 0.5rem;
 }
 
+/* Squares: */
 .square {
   position: absolute;
   width: 60px;
@@ -71,4 +72,54 @@
 
 .selected {
   background-color: #216778;
+}
+
+/* Ranks and Files: */
+.rank-1 {
+  top: 420px;
+}
+.rank-2 {
+  top: 360px;
+}
+.rank-3 {
+  top: 300px;
+}
+.rank-4 {
+  top: 240px;
+}
+.rank-5 {
+  top: 180px;
+}
+.rank-6 {
+  top: 120px;
+}
+.rank-7 {
+  top: 60px;
+}
+.rank-8 {
+  top: 0px;
+}
+.file-1 {
+  left: 0px;
+}
+.file-2 {
+  left: 60px;
+}
+.file-3 {
+  left: 120px;
+}
+.file-4 {
+  left: 180px;
+}
+.file-5 {
+  left: 240px;
+}
+.file-6 {
+  left: 300px;
+}
+.file-7 {
+  left: 360px;
+}
+.file-8 {
+  left: 420px;
 }
