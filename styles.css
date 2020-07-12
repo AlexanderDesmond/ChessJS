@@ -54,3 +54,21 @@
 #undo-btn {
   margin-top: 0.5rem;
 }
+
+.square {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+}
+
+.dark {
+  background-color: #5fbcd3;
+}
+
+.light {
+  background-color: #afdde9;
+}
+
+.selected {
+  background-color: #216778;
+}
