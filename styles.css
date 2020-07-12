@@ -123,3 +123,7 @@
 .file-8 {
   left: 420px;
 }
+
+.piece {
+  position: absolute;
+}
