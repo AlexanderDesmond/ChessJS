@@ -8,6 +8,14 @@ function submitFen(): void {
   //startPerfTest(5);
 }
 
+// Clear all pieces from board.
+function clearPieces(): void {
+  let pieces = document.getElementsByClassName("piece");
+  while (pieces.length > 0) {
+    pieces[0].parentNode?.removeChild(pieces[0]);
+  }
+}
+
 // Set board pieces.
 function setupPieces(): void {
   let sq120: number, piece: number, file: number, rank: number;
