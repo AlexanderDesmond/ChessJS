@@ -25,4 +25,21 @@
   position: relative;
   margin-top: 1rem;
   margin-left: 2rem;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.engine-output {
+  display: flex;
+  flex-direction: column;
+}
+
+.engine-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.engine-input > button {
+  width: 100px;
 }
