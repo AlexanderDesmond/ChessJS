@@ -117,6 +117,27 @@ function deselectSquare(square: number): void {
   });
 }
 
+function makeUserMove(): void {
+  if (
+    userMove.origin !== SQUARES.NO_SQUARE &&
+    userMove.destination !== SQUARES.NO_SQUARE
+  ) {
+    console.log(
+      "User Move: " +
+        moveToString(userMove.origin) +
+        moveToString(userMove.destination)
+    );
+
+    // Deselect squares
+    deselectSquare(userMove.origin);
+    deselectSquare(userMove.destination);
+
+    // Reset userMove properties for next move.
+    userMove.origin = SQUARES.NO_SQUARE;
+    userMove.destination = SQUARES.NO_SQUARE;
+  }
+}
+
 // Make sure the DOM is loaded first.
 document.addEventListener("DOMContentLoaded", () => {
   // Handle square click.
@@ -127,7 +148,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const mouseEvent = <MouseEvent>e;
 
       if (userMove.origin !== SQUARES.NO_SQUARE) {
-        userMove.origin = selectSquare(mouseEvent.pageX, mouseEvent.pageY);
+        userMove.destination = selectSquare(mouseEvent.pageX, mouseEvent.pageY);
+        makeUserMove();
       }
 
       //selectSquare(mouseEvent.pageX, mouseEvent.pageY);
@@ -146,6 +168,8 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         userMove.destination = selectSquare(mouseEvent.pageX, mouseEvent.pageY);
       }
+
+      makeUserMove();
 
       //selectSquare(mouseEvent.pageX, mouseEvent.pageY);
     });
