@@ -25,6 +25,10 @@ function setupPieces(): void {
     // Get piece.
     piece = chessBoard.pieces[sq120];
 
+    if (piece >= PIECES.wP && piece <= PIECES.bK) {
+      addBoardPiece(sq120, piece);
+    }
+    /*
     // Get file and rank.
     file = files[sq120];
     rank = ranks[sq120];
@@ -51,6 +55,7 @@ function setupPieces(): void {
       // Add new image node to board div.
       document.getElementsByClassName("board")[0].appendChild(node);
     }
+    */
   }
 }
 
@@ -166,6 +171,31 @@ function isSquare(square: number, top: number, left: number): boolean {
   }
 
   return false;
+}
+
+// Add piece to board.
+function addBoardPiece(square: number, piece: number): void {
+  // Set up files and rank names.
+  const file: number = files[square],
+    rank: number = ranks[square],
+    fileName: string = "file" + "-" + (file + 1),
+    rankName: string = "rank" + "-" + (rank + 1);
+
+  // Set up piece file name
+  const pieceFileName: string =
+    "images/chess-pieces/" +
+    sideChar[pieceColour[piece]] +
+    pieceChar[piece].toUpperCase() +
+    ".png";
+
+  // Create new image node.
+  let node = document.createElement("img");
+  // Add piece class to new image node.
+  node.classList.add("piece", rankName, fileName);
+  // Set src attribute of new image node.
+  node.setAttribute("src", pieceFileName);
+  // Add new image node to board div.
+  document.getElementsByClassName("board")[0].appendChild(node);
 }
 
 // Remove piece fom board.
