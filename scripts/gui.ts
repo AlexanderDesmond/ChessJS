@@ -63,7 +63,7 @@ function newGame(fen: string): void {
 }
 
 // Select a square.
-function selectSquare(x: number, y: number): void {
+function selectSquare(x: number, y: number): number {
   // Get position of chessboard.
   const board = document.querySelector(".board") as HTMLElement;
   const boardPosition = {
@@ -83,6 +83,8 @@ function selectSquare(x: number, y: number): void {
   highlightSquare(square);
 
   console.log("Selected Square: ", squareToString(square));
+
+  return square;
 }
 
 // Highlight the given square.
@@ -123,7 +125,12 @@ document.addEventListener("DOMContentLoaded", () => {
     elements[i].addEventListener("click", (e: Event) => {
       console.log("Square clicked!");
       const mouseEvent = <MouseEvent>e;
-      selectSquare(mouseEvent.pageX, mouseEvent.pageY);
+
+      if (userMove.origin !== SQUARES.NO_SQUARE) {
+        userMove.origin = selectSquare(mouseEvent.pageX, mouseEvent.pageY);
+      }
+
+      //selectSquare(mouseEvent.pageX, mouseEvent.pageY);
     });
   }
 
@@ -133,7 +140,14 @@ document.addEventListener("DOMContentLoaded", () => {
     elements[i].addEventListener("click", (e: Event) => {
       console.log("Piece clicked!");
       const mouseEvent = <MouseEvent>e;
-      selectSquare(mouseEvent.pageX, mouseEvent.pageY);
+
+      if (userMove.origin === SQUARES.NO_SQUARE) {
+        userMove.origin = selectSquare(mouseEvent.pageX, mouseEvent.pageY);
+      } else {
+        userMove.destination = selectSquare(mouseEvent.pageX, mouseEvent.pageY);
+      }
+
+      //selectSquare(mouseEvent.pageX, mouseEvent.pageY);
     });
   }
 });
