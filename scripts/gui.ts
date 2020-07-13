@@ -168,6 +168,18 @@ function isSquare(square: number, top: number, left: number): boolean {
   return false;
 }
 
+// Remove piece fom board.
+function removeBoardPiece(square: number): void {
+  const pieces = document.getElementsByClassName("piece");
+  const piecesArr = Array.from(pieces) as HTMLElement[];
+
+  piecesArr.forEach((pc) => {
+    if (isSquare(square, pc.offsetTop, pc.offsetLeft)) {
+      pc.remove();
+    }
+  });
+}
+
 // Make sure the DOM is loaded first.
 document.addEventListener("DOMContentLoaded", () => {
   // Handle square click.
