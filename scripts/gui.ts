@@ -128,6 +128,12 @@ function makeUserMove(): void {
         moveToString(userMove.destination)
     );
 
+    let parsedMove: number = parseMove(userMove.origin, userMove.destination);
+    if (parsedMove !== NO_MOVE) {
+      makeMove(parsedMove);
+      printBoard(); // temp print to console.
+    }
+
     // Deselect squares
     deselectSquare(userMove.origin);
     deselectSquare(userMove.destination);
