@@ -64,7 +64,22 @@ function newGame(fen: string): void {
 
 // Select a square.
 function selectSquare(x: number, y: number): void {
-  console.log("Clicked! At: " + x + ", " + y);
+  // Get position of chessboard.
+  const board = document.querySelector(".board") as HTMLElement;
+  const boardPosition = {
+    top: Math.floor(board.offsetTop),
+    left: Math.floor(board.offsetLeft),
+  };
+
+  // Get File
+  const file = Math.floor((Math.floor(x) - boardPosition.left) / 60);
+  // Get Rank
+  const rank = 7 - Math.floor((Math.floor(y) - boardPosition.top) / 60);
+
+  // Get Square
+  const square = getSquare(file, rank);
+
+  console.log("Selected Square: ", squareToString(square));
 }
 
 // Make sure the DOM is loaded first.
