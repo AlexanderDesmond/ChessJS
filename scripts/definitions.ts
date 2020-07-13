@@ -594,3 +594,14 @@ function hashSide(): void {
 function hashEnPassant(): void {
   chessBoard.boardState ^= pieceKeys[chessBoard.enPassant];
 }
+
+// Properties for controlling the game
+const gameController = <any>{};
+gameController.engineSide = COLOURS.BOTH;
+gameController.playerSide = COLOURS.BOTH;
+gameController.gameOver = false;
+
+// Properties for holding data about moves the user makes.
+const userMove = <any>{};
+userMove.origin = SQUARES.NO_SQUARE;
+userMove.destination = SQUARES.NO_SQUARE;
