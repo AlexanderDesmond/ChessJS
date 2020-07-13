@@ -79,7 +79,25 @@ function selectSquare(x: number, y: number): void {
   // Get Square
   const square = getSquare(file, rank);
 
+  // Highlight the selected square.
+  highlightSquare(square);
+
   console.log("Selected Square: ", squareToString(square));
+}
+
+//
+function highlightSquare(square: number): void {
+  const squares = document.getElementsByClassName("square");
+  const squaresArr = Array.from(squares) as HTMLElement[];
+
+  squaresArr.forEach((sq) => {
+    if (
+      ranks[square] === 7 - Math.round(sq.offsetTop / 60) &&
+      files[square] === Math.round(sq.offsetLeft / 60)
+    ) {
+      sq.classList.add("selected");
+    }
+  });
 }
 
 // Make sure the DOM is loaded first.
