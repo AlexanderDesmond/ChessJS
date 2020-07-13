@@ -93,12 +93,18 @@ function highlightSquare(square: number): void {
   const squaresArr = Array.from(squares) as HTMLElement[];
 
   squaresArr.forEach((sq) => {
+    if (isSquare(square, sq.offsetTop, sq.offsetLeft)) {
+      sq.classList.add("selected");
+    }
+
+    /*
     if (
       ranks[square] === 7 - Math.round(sq.offsetTop / 60) &&
       files[square] === Math.round(sq.offsetLeft / 60)
     ) {
       sq.classList.add("selected");
     }
+    */
   });
 }
 
@@ -108,12 +114,18 @@ function deselectSquare(square: number): void {
   const squaresArr = Array.from(squares) as HTMLElement[];
 
   squaresArr.forEach((sq) => {
+    if (isSquare(square, sq.offsetTop, sq.offsetLeft)) {
+      sq.classList.remove("selected");
+    }
+
+    /*
     if (
       ranks[square] === 7 - Math.round(sq.offsetTop / 60) &&
       files[square] === Math.round(sq.offsetLeft / 60)
     ) {
       sq.classList.remove("selected");
     }
+    */
   });
 }
 
@@ -142,6 +154,18 @@ function makeUserMove(): void {
     userMove.origin = SQUARES.NO_SQUARE;
     userMove.destination = SQUARES.NO_SQUARE;
   }
+}
+
+// Returns true if a square was clicked, returns false otherwise.
+function isSquare(square: number, top: number, left: number): boolean {
+  if (
+    ranks[square] === 7 - Math.round(top / 60) &&
+    files[square] === Math.round(left / 60)
+  ) {
+    return true;
+  }
+
+  return false;
 }
 
 // Make sure the DOM is loaded first.
