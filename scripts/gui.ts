@@ -61,3 +61,31 @@ function newGame(fen: string): void {
 
   setupPieces();
 }
+
+// Select a square.
+function selectSquare(x: number, y: number): void {
+  console.log("Clicked! At: " + x + ", " + y);
+}
+
+// Make sure the DOM is loaded first.
+document.addEventListener("DOMContentLoaded", () => {
+  // Handle square click.
+  let elements = document.getElementsByClassName("square");
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].addEventListener("click", (e: Event) => {
+      console.log("Square clicked!");
+      const mouseEvent = <MouseEvent>e;
+      selectSquare(mouseEvent.pageX, mouseEvent.pageY);
+    });
+  }
+
+  // Handle piece click.
+  elements = document.getElementsByClassName("piece");
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].addEventListener("click", (e: Event) => {
+      console.log("Piece clicked!");
+      const mouseEvent = <MouseEvent>e;
+      selectSquare(mouseEvent.pageX, mouseEvent.pageY);
+    });
+  }
+});
