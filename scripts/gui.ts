@@ -149,6 +149,8 @@ function makeUserMove(): void {
     if (parsedMove !== NO_MOVE) {
       makeMove(parsedMove);
       printBoard(); // temp print to console.
+
+      moveBoardPiece(parsedMove);
     }
 
     // Deselect squares
@@ -208,6 +210,75 @@ function removeBoardPiece(square: number): void {
       pc.remove();
     }
   });
+}
+
+// Move piece on the board.
+function moveBoardPiece(move: number): void {
+  // Get origin and destination squares for move.
+  const origin: number = getOriginSquare(move);
+  const destination: number = getDestinationSquare(move);
+
+  // If move is an En Passant capture
+  if (move & EP_FLAG) {
+    let removeEP: number = PIECES.EMPTY;
+
+    if (chessBoard.side === COLOURS.BLACK) {
+      removeEP = destination - 10;
+    } else if (chessBoard.side === COLOURS.WHITE) {
+      removeEP = destination + 10;
+    }
+
+    removeBoardPiece(removeEP);
+  }
+  // If move is a capture
+  else if (getCapturedPiece(move)) {
+    removeBoardPiece(destination);
+  }
+
+  // Set up files and rank names.
+  const file: number = files[destination],
+    rank: number = ranks[destination],
+    fileName: string = "file" + "-" + (file + 1),
+    rankName: string = "rank" + "-" + (rank + 1);
+
+  // Refresh CSS classes
+  const pieces = document.getElementsByClassName("piece");
+  const piecesArr = Array.from(pieces) as HTMLElement[];
+  piecesArr.forEach((pc) => {
+    if (isSquare(origin, pc.offsetTop, pc.offsetLeft)) {
+      // Remove CSS classes.
+      pc.classList.remove(...pc.classList);
+      // Add CSS classes
+      pc.classList.add("piece", rankName, fileName);
+    }
+  });
+
+  // Handle Castling moves
+  if (move & CASTLE_FLAG) {
+    switch (destination) {
+      case SQUARES.G1:
+        removeBoardPiece(SQUARES.H1);
+        addBoardPiece(SQUARES.F1, PIECES.wR);
+        break;
+      case SQUARES.C1:
+        removeBoardPiece(SQUARES.A1);
+        addBoardPiece(SQUARES.D1, PIECES.wR);
+        break;
+      case SQUARES.G8:
+        removeBoardPiece(SQUARES.H8);
+        addBoardPiece(SQUARES.F8, PIECES.bR);
+        break;
+      case SQUARES.C8:
+        removeBoardPiece(SQUARES.A8);
+        addBoardPiece(SQUARES.D8, PIECES.bR);
+        break;
+    }
+  }
+  // Handle Promotion moves
+  else if (getPromotedPiece(move)) {
+    removeBoardPiece(destination);
+    addBoardPiece(destination, getPromotedPiece(move));
+  }
 }
 
 // Make sure the DOM is loaded first.
