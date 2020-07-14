@@ -145,7 +145,7 @@ function generateMoves(quiescence: boolean): void {
         }
       }
       // Handle queenside castling.
-      if (chessBoard.castlePerm & CASTLE_BIT.WQCA) {
+      if (chessBoard.castling & CASTLE_BIT.WQCA) {
         // If D1, C1, and B1 are empty.
         if (
           chessBoard.pieces[SQUARES.D1] === PIECES.EMPTY &&

@@ -272,6 +272,9 @@ function moveBoardPiece(move: number): void {
         removeBoardPiece(SQUARES.A8);
         addBoardPiece(SQUARES.D8, PIECES.bR);
         break;
+      default:
+        console.log("ERROR: Error with Castling!");
+        break;
     }
   }
   // Handle Promotion moves
