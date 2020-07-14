@@ -65,6 +65,7 @@ function newGame(fen: string): void {
   printBoard();
 
   setupPieces();
+  checkGameStatus();
 }
 
 // Select a square.
@@ -151,6 +152,7 @@ function makeUserMove(): void {
       printBoard(); // temp print to console.
 
       moveBoardPiece(parsedMove);
+      checkGameStatus();
     }
 
     // Deselect squares
@@ -419,6 +421,17 @@ function checkResult(): boolean {
   }
 
   return false;
+}
+
+// Check the status of the game.
+function checkGameStatus(): void {
+  if (checkResult()) {
+    gameController.gameOver = true;
+  } else {
+    gameController.gameOver = false;
+
+    document.getElementsByClassName("game-status")[0].innerHTML = "";
+  }
 }
 
 // Make sure the DOM is loaded first.
