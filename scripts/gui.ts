@@ -287,6 +287,56 @@ function moveBoardPiece(move: number): void {
   }
 }
 
+// Return true if there is a draw, return false otherwise.
+function isDraw(): boolean {
+  // If there are Pawns on the board, no draw.
+  if (
+    chessBoard.pieceNumber[PIECES.wP] !== 0 ||
+    chessBoard.pieceNumber[PIECES.bP] !== 0
+  ) {
+    return false;
+  }
+  //If there are Queens or Rooks on the board, no draw,
+  if (
+    chessBoard.pieceNumber[PIECES.wQ] !== 0 ||
+    chessBoard.pieceNumber[PIECES.bQ] !== 0 ||
+    chessBoard.pieceNumber[PIECES.wR] !== 0 ||
+    chessBoard.pieceNumber[PIECES.bR] !== 0
+  ) {
+    return false;
+  }
+  // If a side has more than one Bishop, no draw.
+  if (
+    chessBoard.pieceNumber[PIECES.wB] > 1 ||
+    chessBoard.pieceNumber[PIECES.bB] > 1
+  ) {
+    return false;
+  }
+  // If a side has more than one Knight, no draw.
+  if (
+    chessBoard.pieceNumber[PIECES.wN] > 1 ||
+    chessBoard.pieceNumber[PIECES.bN] > 1
+  ) {
+    return false;
+  }
+  // If White has a Bishop and a Knight, no draw.
+  if (
+    chessBoard.pieceNumber[PIECES.wB] !== 0 ||
+    chessBoard.pieceNumber[PIECES.wN] !== 0
+  ) {
+    return false;
+  }
+  // If Black has a Bishop and a Knight, no draw.
+  if (
+    chessBoard.pieceNumber[PIECES.bB] !== 0 ||
+    chessBoard.pieceNumber[PIECES.bN] !== 0
+  ) {
+    return false;
+  }
+
+  return true;
+}
+
 // Make sure the DOM is loaded first.
 document.addEventListener("DOMContentLoaded", () => {
   // Make sure all HTML elements are loaded first.
