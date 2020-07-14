@@ -198,6 +198,9 @@ function addBoardPiece(square: number, piece: number): void {
   node.setAttribute("src", pieceFileName);
   // Add new image node to board div.
   document.getElementsByClassName("board")[0].appendChild(node);
+
+  onSquareClick(); // just here for testing
+  onPieceClick();
 }
 
 // Remove piece fom board.
@@ -286,8 +289,15 @@ function moveBoardPiece(move: number): void {
 
 // Make sure the DOM is loaded first.
 document.addEventListener("DOMContentLoaded", () => {
-  // Handle square click.
-  let elements = document.getElementsByClassName("square");
+  // Make sure all HTML elements are loaded first.
+
+  onSquareClick();
+  onPieceClick();
+});
+
+// Handle square click.
+function onSquareClick(): void {
+  const elements = document.getElementsByClassName("square");
   for (let i = 0; i < elements.length; i++) {
     elements[i].addEventListener("click", (e: Event) => {
       console.log("Square clicked!");
@@ -297,13 +307,13 @@ document.addEventListener("DOMContentLoaded", () => {
         userMove.destination = selectSquare(mouseEvent.pageX, mouseEvent.pageY);
         makeUserMove();
       }
-
-      //selectSquare(mouseEvent.pageX, mouseEvent.pageY);
     });
   }
+}
 
-  // Handle piece click.
-  elements = document.getElementsByClassName("piece");
+// Handle piece click.
+function onPieceClick(): void {
+  const elements = document.getElementsByClassName("piece");
   for (let i = 0; i < elements.length; i++) {
     elements[i].addEventListener("click", (e: Event) => {
       console.log("Piece clicked!");
@@ -316,8 +326,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       makeUserMove();
-
-      //selectSquare(mouseEvent.pageX, mouseEvent.pageY);
     });
   }
-});
+}
