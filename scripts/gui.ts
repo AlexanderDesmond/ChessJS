@@ -350,6 +350,77 @@ function getRepetitions(): number {
   return repetition;
 }
 
+function checkResult(): boolean {
+  // Fifty Move Rule
+  if (chessBoard.fiftyMoveRule >= 100) {
+    document.getElementsByClassName("game-status")[0].innerHTML =
+      "GAME DRAWN {Fifty Move Rule}";
+
+    return true;
+  }
+
+  // Threefold Repetition
+  if (getRepetitions() >= 2) {
+    document.getElementsByClassName("game-status")[0].innerHTML =
+      "GAME DRAWN {Threefold Repetition}";
+
+    return true;
+  }
+
+  // Insufficient Material
+  if (isDraw()) {
+    document.getElementsByClassName("game-status")[0].innerHTML =
+      "GAME DRAWN {Insufficient Material}";
+
+    return true;
+  }
+
+  // Search for legal moves.
+  generateMoves(false);
+  let found: number = 0;
+  for (
+    let i = chessBoard.moveListStart[chessBoard.plyCount];
+    i < chessBoard.moveListStart[chessBoard.plyCount + 1];
+    i++
+  ) {
+    if (!makeMove(chessBoard.moveList[i])) {
+      continue;
+    }
+
+    found++;
+    revertMove();
+    break;
+  }
+  // If there is at least one legal move available, it cannot be a draw.
+  if (found !== 0) return false;
+
+  // Search for checkmate and stalemate.
+  let inCheck = isSquareUnderAttack(
+    chessBoard.pieceList[getPieceIndex(KINGS[chessBoard.side], 0)],
+    chessBoard.side ^ 1
+  );
+  if (inCheck) {
+    if (chessBoard.side === COLOURS.WHITE) {
+      document.getElementsByClassName("game-status")[0].innerHTML =
+        "GAME OVER {Black Checkmates}";
+
+      return true;
+    } else if (chessBoard.side === COLOURS.BLACK) {
+      document.getElementsByClassName("game-status")[0].innerHTML =
+        "GAME OVER {White Checkmates}";
+
+      return true;
+    }
+  } else {
+    document.getElementsByClassName("game-status")[0].innerHTML =
+      "GAME DRAWN {Stalemate}";
+
+    return true;
+  }
+
+  return false;
+}
+
 // Make sure the DOM is loaded first.
 document.addEventListener("DOMContentLoaded", () => {
   // Make sure all HTML elements are loaded first.
