@@ -337,6 +337,19 @@ function isDraw(): boolean {
   return true;
 }
 
+// Return how many times this position has occurred.
+function getRepetitions(): number {
+  let repetition: number = 0;
+
+  for (let i = 0; i < chessBoard.plyHistory; i++) {
+    if (chessBoard.history[i].boardState === chessBoard.boardState) {
+      repetition++;
+    }
+  }
+
+  return repetition;
+}
+
 // Make sure the DOM is loaded first.
 document.addEventListener("DOMContentLoaded", () => {
   // Make sure all HTML elements are loaded first.
