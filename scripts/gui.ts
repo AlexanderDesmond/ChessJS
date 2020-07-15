@@ -201,8 +201,7 @@ function addBoardPiece(square: number, piece: number): void {
   // Add new image node to board div.
   document.getElementsByClassName("board")[0].appendChild(node);
 
-  onSquareClick(); // just here for testing
-  onPieceClick();
+  onPieceClick(); // just here for testing
 }
 
 // Remove piece fom board.
@@ -355,7 +354,7 @@ function getRepetitions(): number {
 function checkResult(): boolean {
   // Fifty Move Rule
   if (chessBoard.fiftyMoveRule >= 100) {
-    document.getElementsByClassName("game-status")[0].innerHTML =
+    document.getElementsByClassName("game-status")[0].textContent =
       "GAME DRAWN {Fifty Move Rule}";
 
     return true;
@@ -363,7 +362,7 @@ function checkResult(): boolean {
 
   // Threefold Repetition
   if (getRepetitions() >= 2) {
-    document.getElementsByClassName("game-status")[0].innerHTML =
+    document.getElementsByClassName("game-status")[0].textContent =
       "GAME DRAWN {Threefold Repetition}";
 
     return true;
@@ -371,7 +370,7 @@ function checkResult(): boolean {
 
   // Insufficient Material
   if (isDraw()) {
-    document.getElementsByClassName("game-status")[0].innerHTML =
+    document.getElementsByClassName("game-status")[0].textContent =
       "GAME DRAWN {Insufficient Material}";
 
     return true;
@@ -403,18 +402,18 @@ function checkResult(): boolean {
   );
   if (inCheck) {
     if (chessBoard.side === COLOURS.WHITE) {
-      document.getElementsByClassName("game-status")[0].innerHTML =
+      document.getElementsByClassName("game-status")[0].textContent =
         "GAME OVER {Black Checkmates}";
 
       return true;
     } else if (chessBoard.side === COLOURS.BLACK) {
-      document.getElementsByClassName("game-status")[0].innerHTML =
+      document.getElementsByClassName("game-status")[0].textContent =
         "GAME OVER {White Checkmates}";
 
       return true;
     }
   } else {
-    document.getElementsByClassName("game-status")[0].innerHTML =
+    document.getElementsByClassName("game-status")[0].textContent =
       "GAME DRAWN {Stalemate}";
 
     return true;
@@ -430,7 +429,7 @@ function checkGameStatus(): void {
   } else {
     gameController.gameOver = false;
 
-    document.getElementsByClassName("game-status")[0].innerHTML = "";
+    document.getElementsByClassName("game-status")[0].textContent = "";
   }
 }
 
