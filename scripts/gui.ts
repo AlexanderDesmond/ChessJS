@@ -516,5 +516,15 @@ function onMoveClick(): void {
 
   preSearch();
 }
-function onNewClick(): void {}
-function onUndoClick(): void {}
+function onNewClick(): void {
+  newGame(START_FEN);
+}
+function onUndoClick(): void {
+  // If there are past moves.
+  if (chessBoard.plyHistory > 0) {
+    revertMove();
+    chessBoard.plyCount = 0;
+
+    setupPieces();
+  }
+}
