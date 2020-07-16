@@ -408,8 +408,8 @@ function clearPVTable(): void {
   }
 }
 
-//
-function updateEngineOutput(score: number, depth: number) {
+// Update engine output info on GUI
+function updateEngineOutput(score: number, depth: number): void {
   let scoreTxt: string = "Score: " + (score / 100).toFixed(2);
 
   // For Checkmate
