@@ -516,3 +516,5 @@ function onMoveClick(): void {
 
   preSearch();
 }
+function onNewClick(): void {}
+function onUndoClick(): void {}
