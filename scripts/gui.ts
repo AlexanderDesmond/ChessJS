@@ -486,3 +486,11 @@ function preSearch(): void {
     setTimeout(() => startSearch(), 200);
   }
 }
+
+// Button onClick handlers
+function onMoveClick(): void {
+  // Switch to other player side.
+  gameController.playerSide = gameController.playerSide ^ 1;
+
+  preSearch();
+}
