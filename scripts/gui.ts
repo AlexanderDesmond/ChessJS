@@ -153,6 +153,7 @@ function makeUserMove(): void {
 
       moveBoardPiece(parsedMove);
       checkGameStatus();
+      preSearch();
     }
 
     // Deselect squares
@@ -485,6 +486,25 @@ function preSearch(): void {
     // Start searching.
     setTimeout(() => startSearch(), 200);
   }
+}
+
+// Begin search
+function startSearch(): void {
+  // Set depth
+  searchController.depth = MAX_DEPTH;
+
+  // Set time
+  let currentTime: number = Date.now();
+  let thinkingTime: string = document.getElementById("time-limit")?.nodeValue!;
+  searchController.time = parseInt(thinkingTime) * 100;
+
+  // Search for best move then make it.
+  searchPosition();
+  makeMove(searchController.best);
+  moveBoardPiece(searchController.best);
+
+  // Check if Game Over state has been achieved.
+  checkGameStatus();
 }
 
 // Button onClick handlers
