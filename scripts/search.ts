@@ -23,14 +23,15 @@ function searchPosition(): void {
   let bestMove: number = NO_MOVE,
     bestScore: number = -Infinity,
     line: string = "",
-    pvNum: number = 0;
+    pvNum: number = 0,
+    currentDepth: number = 1;
 
   clearForSearch();
 
   // Iterative deepening depth-first search
   for (
-    let currentDepth = 1;
-    currentDepth <= 6 /* searchController.depth */;
+    currentDepth = 1;
+    currentDepth <= searchController.depth;
     currentDepth++
   ) {
     // Alpha Beta search algorithm here
@@ -72,6 +73,9 @@ function searchPosition(): void {
 
   searchController.best = bestMove;
   searchController.isThinking = false;
+
+  // Update engine output on GUI
+  updateEngineOutput(bestScore, currentDepth);
 }
 
 // Alpha Beta pruning algorithm
@@ -402,4 +406,34 @@ function clearPVTable(): void {
     chessBoard.pvTable[i].move = NO_MOVE;
     chessBoard.pvTable[i].boardState = 0;
   }
+}
+
+//
+function updateEngineOutput(score: number, depth: number) {
+  let scoreTxt: string = "Score: " + (score / 100).toFixed(2);
+
+  // For Checkmate
+  if (Math.abs(score) > CHECKMATE - MAX_DEPTH) {
+    scoreTxt =
+      "Score: Checkmate in " + (CHECKMATE - Math.abs(score)) + " moves";
+  }
+
+  document.getElementsByClassName("ordering-spn")[0].textContent =
+    "Ordering: " +
+    (
+      (searchController.failHighFirst / searchController.failHigh) *
+      100
+    ).toFixed(2) +
+    "%";
+  document.getElementsByClassName("depth-spn")[0].textContent =
+    "Depth: " + depth;
+  document.getElementsByClassName("score-spn")[0].textContent = scoreTxt;
+  document.getElementsByClassName("nodes-spn")[0].textContent =
+    "Nodes: " + searchController.nodes;
+  document.getElementsByClassName("time-spn")[0].textContent =
+    "Time: " +
+    ((Date.now() - searchController.startTime) / 1000).toFixed(1) +
+    "s";
+  document.getElementsByClassName("best-move-spn")[0].textContent =
+    "Best Move: " + moveToString(searchController.best);
 }
