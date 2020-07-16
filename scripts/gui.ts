@@ -475,3 +475,14 @@ function onPieceClick(): void {
     });
   }
 }
+
+// Prepare to search.
+function preSearch(): void {
+  // If the game is not over.
+  if (!gameController.gameOver) {
+    searchController.isThinking = true;
+
+    // Start searching.
+    setTimeout(() => startSearch(), 200);
+  }
+}
