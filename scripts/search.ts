@@ -21,6 +21,7 @@ searchController.isThinking;
 // Get the best move for the current position.
 function searchPosition(): void {
   let bestMove: number = NO_MOVE,
+    score: number = -Infinity,
     bestScore: number = -Infinity,
     line: string = "",
     pvNum: number = 0,
@@ -35,13 +36,14 @@ function searchPosition(): void {
     currentDepth++
   ) {
     // Alpha Beta search algorithm here
-    bestScore = alphaBeta(-Infinity, Infinity, currentDepth);
+    score = alphaBeta(-Infinity, Infinity, currentDepth);
 
     // If the time has run out, stop searching.
     if (searchController.timeStopped) {
       break;
     }
 
+    bestScore = score;
     bestMove = searchPVTable();
     line =
       "Depth: " +
@@ -415,7 +417,7 @@ function updateEngineOutput(score: number, depth: number): void {
   // For Checkmate
   if (Math.abs(score) > CHECKMATE - MAX_DEPTH) {
     scoreTxt =
-      "Score: Checkmate in " + (CHECKMATE - Math.abs(score)) + " moves";
+      "Score: Checkmate in " + (CHECKMATE - Math.abs(score) - 1) + " moves";
   }
 
   document.getElementsByClassName("ordering-spn")[0].textContent =
