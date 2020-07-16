@@ -495,8 +495,10 @@ function startSearch(): void {
 
   // Set time
   let currentTime: number = Date.now();
-  let thinkingTime: string = document.getElementById("time-limit")?.nodeValue!;
-  searchController.time = parseInt(thinkingTime) * 100;
+  let thinkingTime = (document.getElementById("time-limit") as HTMLInputElement)
+    .value;
+  console.log("Thinking Time: ", thinkingTime); // testing
+  searchController.time = parseInt(thinkingTime) * 1000;
 
   // Search for best move then make it.
   searchPosition();
