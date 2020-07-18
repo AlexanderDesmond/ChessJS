@@ -12,3 +12,9 @@ This project is mainly just to practice using some algorithms and concepts.
 - [Binary search tree](https://en.wikipedia.org/wiki/Binary_search_tree)
 - [Iterative deepening](https://en.wikipedia.org/wiki/Iterative_deepening_depth-first_search) [depth-first search](https://en.wikipedia.org/wiki/Depth-first_search)
 - [Bitwise operations](https://en.wikipedia.org/wiki/Bitwise_operation)
+
+**Demo**
+
+[Link to YouTube](https://youtu.be/sxr40WbWKtI) - Demonstration of the chess engine against a human player. Also includes a demonstration of castling and pawn promotion.
+
+[Link to YouTube](https://youtu.be/Y1Rce3zqpuU) - Demonstration of the chess engine playing against itself. Also includes the chess engine handling a board position provided by a FEN code.
