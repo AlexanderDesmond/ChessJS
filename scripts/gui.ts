@@ -28,34 +28,6 @@ function setupPieces(): void {
     if (piece >= PIECES.wP && piece <= PIECES.bK) {
       addBoardPiece(sq120, piece);
     }
-    /*
-    // Get file and rank.
-    file = files[sq120];
-    rank = ranks[sq120];
-
-    // For every piece.
-    if (piece >= PIECES.wP && piece <= PIECES.bK) {
-      // Set up file and rank names.
-      let fileName: string = "file" + "-" + (file + 1);
-      let rankName: string = "rank" + "-" + (rank + 1);
-
-      // Set up piece file name
-      let pieceFileName: string =
-        "images/chess-pieces/" +
-        sideChar[pieceColour[piece]] +
-        pieceChar[piece].toUpperCase() +
-        ".png";
-
-      // Create new image node.
-      let node = document.createElement("img");
-      // Add piece class to new image node.
-      node.classList.add("piece", rankName, fileName);
-      // Set src attribute of new image node.
-      node.setAttribute("src", pieceFileName);
-      // Add new image node to board div.
-      document.getElementsByClassName("board")[0].appendChild(node);
-    }
-    */
   }
 }
 
@@ -356,7 +328,7 @@ function checkResult(): boolean {
   // Fifty Move Rule
   if (chessBoard.fiftyMoveRule >= 100) {
     document.getElementsByClassName("game-status")[0].textContent =
-      "GAME DRAWN {Fifty Move Rule}";
+      "GAME DRAWN (Fifty Move Rule)";
 
     return true;
   }
@@ -364,7 +336,7 @@ function checkResult(): boolean {
   // Threefold Repetition
   if (getRepetitions() >= 2) {
     document.getElementsByClassName("game-status")[0].textContent =
-      "GAME DRAWN {Threefold Repetition}";
+      "GAME DRAWN (Threefold Repetition)";
 
     return true;
   }
@@ -372,7 +344,7 @@ function checkResult(): boolean {
   // Insufficient Material
   if (isDraw()) {
     document.getElementsByClassName("game-status")[0].textContent =
-      "GAME DRAWN {Insufficient Material}";
+      "GAME DRAWN (Insufficient Material)";
 
     return true;
   }
@@ -404,18 +376,18 @@ function checkResult(): boolean {
   if (inCheck) {
     if (chessBoard.side === COLOURS.WHITE) {
       document.getElementsByClassName("game-status")[0].textContent =
-        "GAME OVER {Black Checkmates}";
+        "GAME OVER (Black Checkmates)";
 
       return true;
     } else if (chessBoard.side === COLOURS.BLACK) {
       document.getElementsByClassName("game-status")[0].textContent =
-        "GAME OVER {White Checkmates}";
+        "GAME OVER (White Checkmates)";
 
       return true;
     }
   } else {
     document.getElementsByClassName("game-status")[0].textContent =
-      "GAME DRAWN {Stalemate}";
+      "GAME DRAWN (Stalemate)";
 
     return true;
   }
